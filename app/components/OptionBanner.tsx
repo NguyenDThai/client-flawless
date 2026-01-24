@@ -5,7 +5,7 @@ const OptionBanner = () => {
   return (
     <div className="py-24 px-10">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 lg:flex-row items-center justify-between">
           <div className="w-[336px] flex flex-col justify-center items-center gap-4">
             <FaHandSparkles size={40} className="text-blue-500" />
             <div>
