@@ -15,7 +15,7 @@ const SkincareRegimen = () => {
             into your daily routine.
           </p>
 
-          <button className="flex items-center gap-2 cursor-pointer px-7 py-3 bg-blue-600 text-white rounded-md">
+          <button className="flex items-center gap-2 cursor-pointer px-7 py-3 bg-blue-600 text-white rounded-md hover:bg-white hover:border hover:border-blue-600 hover:text-blue-600 transition-all duration-300">
             <p>Watch The Video</p>
             <FaYoutube />
           </button>

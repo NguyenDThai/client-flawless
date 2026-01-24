@@ -1,4 +1,5 @@
 import Banner from "@/app/components/Banner";
+import Cart from "@/app/components/Cart";
 import CustomerSay from "@/app/components/CustomerSay";
 import FollowUs from "@/app/components/FollowUs";
 import IntroWeb from "@/app/components/IntroWeb";
@@ -20,6 +21,7 @@ export default function Home() {
       <CustomerSay />
       <FollowUs />
       <Methods />
+      <Cart />
     </>
   );
 }
