@@ -29,12 +29,12 @@ const BtnLoginAndLogout = () => {
       ) : (
         <>
           <Link href="/login">
-            <button className="text-gray-700 hover:text-blue-600 font-medium mr-2 cursor-pointer">
+            <button className="text-white hover:text-blue-600 font-medium mr-4 cursor-pointer">
               Đăng nhập
             </button>
           </Link>
           <Link href="/register">
-            <button className="text-gray-700 hover:text-blue-600 font-medium cursor-pointer">
+            <button className="text-white hover:text-blue-600 font-medium cursor-pointer">
               Đăng ký
             </button>
           </Link>

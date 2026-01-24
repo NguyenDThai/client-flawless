@@ -1,4 +1,5 @@
 import Banner from "@/app/components/Banner";
+import IntroWeb from "@/app/components/IntroWeb";
 import NewArrivals from "@/app/components/NewArrivals";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <Banner />
       <NewArrivals />
+      <IntroWeb />
     </>
   );
 }
