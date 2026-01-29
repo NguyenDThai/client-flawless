@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "@/context/AuthContext";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import ConditionalLayout from "@/app/components/ConditionalLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,9 +33,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <Header />
-          {children}
-          <Footer />
+          <ConditionalLayout>{children}</ConditionalLayout>
         </AuthProvider>
         <ToastContainer position="top-center" />
       </body>

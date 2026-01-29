@@ -26,10 +26,13 @@ const LoginPage = () => {
     try {
       const res = await api.post("/auth/login", data);
 
-      localStorage.setItem("access_token", res.data.access_token);
+      if (res.data.user.role === "ADMIN") {
+        route.push("/admin");
+      } else {
+        route.push("/");
+      }
       toast.success("Đăng nhập thành công");
       setUser(res.data.user);
-      route.push("/");
     } catch (error: any) {
       const err = error.response.data.message;
       toast.error(err);

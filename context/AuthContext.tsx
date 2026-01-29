@@ -11,13 +11,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setUser(null);
-      setLoading(false);
-      return;
-    }
     api
       .get("/user/me")
       .then((res) => setUser(res.data))
