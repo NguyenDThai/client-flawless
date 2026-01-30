@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import AdminSideBar from "@/app/admin/components/AdminSideBar";
+import AdminSideBar from "@/app/admin/_components/AdminSideBar";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
@@ -19,7 +19,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   }, [user, loading, route]);
 
   if (loading) return <p>Đang tải vui lòng chờ</p>;
-  if (!user && user.role !== "ADMIN") return null;
 
   return (
     <div className="min-h-screen flex flex-row-reverse bg-gray-100">

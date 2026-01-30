@@ -11,11 +11,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api
-      .get("/user/me")
-      .then((res) => setUser(res.data))
-      .catch(() => setUser(null))
-      .finally(() => setLoading(false));
+    const fetchUser = async () => {
+      try {
+        const res = await api.get("/user/me");
+        setUser(res.data);
+      } catch (error: any) {
+        if (error.response?.status === 401) {
+          setUser(null);
+        } else {
+          console.error("Lỗi hệ thống");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
   }, []);
 
   return (

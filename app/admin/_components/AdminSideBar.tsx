@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import BtnLogout from "@/app/admin/_components/BtnLogout";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   FaTachometerAlt,
   FaUsers,
@@ -9,9 +10,9 @@ import {
   FaChartBar,
   FaChevronLeft,
   FaChevronRight,
-  FaSignOutAlt,
   FaBars,
 } from "react-icons/fa";
+import { MdOutlineCategory } from "react-icons/md";
 
 const AdminSideBar = ({ user }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -37,6 +38,12 @@ const AdminSideBar = ({ user }: any) => {
       icon: <FaBox />,
     },
     {
+      id: "categories",
+      label: "Quản lý danh mục",
+      href: "/admin/category",
+      icon: <MdOutlineCategory />,
+    },
+    {
       id: "orders",
       label: "Quản lý đơn hàng",
       href: "/admin/order",
@@ -52,11 +59,6 @@ const AdminSideBar = ({ user }: any) => {
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
-  };
-
-  const handleLogout = () => {
-    console.log("Logging out...");
-    // Add your logout logic here
   };
 
   return (
@@ -79,7 +81,7 @@ const AdminSideBar = ({ user }: any) => {
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:static h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white z-40 transition-all duration-300 ${
+        className={`fixed lg:static h-full bg-gradient-to-b from-gray-900 to-gray-800 text-white z-40 transition-all duration-300 ${
           isCollapsed ? "w-20" : "w-80"
         } ${isCollapsed ? "-translate-x-full lg:translate-x-0" : "translate-x-0"}`}
       >
@@ -109,7 +111,7 @@ const AdminSideBar = ({ user }: any) => {
             {!isCollapsed && (
               <div>
                 <h3 className="font-semibold">Admin User</h3>
-                <p className="text-sm text-gray-400">{user.email}</p>
+                <p className="text-sm text-gray-400">{user?.email}</p>
               </div>
             )}
           </div>
@@ -137,19 +139,7 @@ const AdminSideBar = ({ user }: any) => {
         </nav>
 
         {/* Logout Button */}
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-700">
-          <button
-            onClick={handleLogout}
-            className={`w-full flex items-center rounded-lg px-4 py-3 transition-all duration-200 hover:bg-red-600 hover:text-white text-gray-300 ${
-              isCollapsed ? "justify-center" : "justify-start"
-            }`}
-          >
-            <span className={`${isCollapsed ? "" : "mr-3"}`}>
-              <FaSignOutAlt />
-            </span>
-            {!isCollapsed && <span>Logout</span>}
-          </button>
-        </div>
+        <BtnLogout isCollapsed={isCollapsed} />
 
         {/* Collapsed indicator */}
         {isCollapsed && (

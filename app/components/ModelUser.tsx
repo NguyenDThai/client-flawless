@@ -1,15 +1,27 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
+import api from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const ModelUser = () => {
   const { user, setUser } = useAuth();
   const route = useRouter();
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    setUser(null);
-    route.push("/");
+
+  const handleLogout = async () => {
+    try {
+      const res = await api.post("/auth/logout");
+      if (res.status === 201) {
+        toast.success(res.data.message);
+        route.push("/");
+        setUser(null);
+      } else {
+        throw new Error("Đã có lỗi xảy ra khi đăng xuất");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="absolute right-10 top-10 z-50">
