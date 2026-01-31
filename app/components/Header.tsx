@@ -1,6 +1,7 @@
 "use client";
 
 import BtnLoginAndLogout from "@/app/components/BtnLoginAndLogout";
+import Link from "next/link";
 import { useState } from "react";
 
 type HeaderProp = {
@@ -22,38 +23,40 @@ const Header = ({ variant = "transparent" }: HeaderProp) => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center min-h-[110px]">
           {/* Logo - ĐỔI MÀU TRẮNG */}
-          <div
-            className={`text-3xl font-bold ${isLight ? "text-black" : "text-white"}`}
-          >
-            Flawless
-          </div>
+          <Link href="/">
+            <div
+              className={`text-3xl font-bold ${isLight ? "text-black" : "text-white"}`}
+            >
+              Flawless
+            </div>
+          </Link>
 
           {/* Desktop Menu - ĐỔI MÀU TRẮNG */}
           <nav className="hidden md:flex space-x-10">
-            <a
-              href="#"
+            <Link
+              href="/"
               className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
             >
               HOME
-            </a>
-            <a
+            </Link>
+            <Link
               href="/shop"
               className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
             >
               SHOP
-            </a>
-            <a
+            </Link>
+            <Link
               href="#"
               className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
             >
               ABOUT
-            </a>
-            <a
+            </Link>
+            <Link
               href="#"
               className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
             >
               CONTACT
-            </a>
+            </Link>
           </nav>
 
           {/* Desktop Action - ĐIỀU CHỈNH ĐỂ PHÙ HỢP */}

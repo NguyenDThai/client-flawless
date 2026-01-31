@@ -7,7 +7,7 @@ const Methods = () => {
   return (
     <div className="bg-[#e7f6ff]">
       <div className="max-w-[1200px] mx-auto p-10">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="flex flex-col items-center justify-center">
             <div className="w-[54px] h-[54px] bg-blue-600 rounded-full flex items-center justify-center">
               <FaTruck size={20} className="text-white" />
