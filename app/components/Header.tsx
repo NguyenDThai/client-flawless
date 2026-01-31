@@ -3,39 +3,54 @@
 import BtnLoginAndLogout from "@/app/components/BtnLoginAndLogout";
 import { useState } from "react";
 
-const Header = () => {
+type HeaderProp = {
+  variant?: "transparent" | "light";
+};
+
+const Header = ({ variant = "transparent" }: HeaderProp) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isLight = variant === "light";
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 min-h-[110px] bg-transparent">
+    <header
+      className={`top-0 left-0 right-0 z-50 min-h-[110px] ${
+        isLight
+          ? "bg-white text-black shadow-sm"
+          : "absolute bg-transparent text-white"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center min-h-[110px]">
           {/* Logo - ĐỔI MÀU TRẮNG */}
-          <div className="text-3xl font-bold text-white">Flawless</div>
+          <div
+            className={`text-3xl font-bold ${isLight ? "text-black" : "text-white"}`}
+          >
+            Flawless
+          </div>
 
           {/* Desktop Menu - ĐỔI MÀU TRẮNG */}
           <nav className="hidden md:flex space-x-10">
             <a
               href="#"
-              className="text-white hover:text-gray-200 font-medium text-lg transition-all duration-200 hover:scale-105 transform origin-center"
+              className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
             >
               HOME
             </a>
             <a
-              href="#"
-              className="text-white hover:text-gray-200 font-medium text-lg transition-all duration-200 hover:scale-105 transform origin-center"
+              href="/shop"
+              className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
             >
               SHOP
             </a>
             <a
               href="#"
-              className="text-white hover:text-gray-200 font-medium text-lg transition-all duration-200 hover:scale-105 transform origin-center"
+              className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
             >
               ABOUT
             </a>
             <a
               href="#"
-              className="text-white hover:text-gray-200 font-medium text-lg transition-all duration-200 hover:scale-105 transform origin-center"
+              className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
             >
               CONTACT
             </a>
@@ -43,7 +58,7 @@ const Header = () => {
 
           {/* Desktop Action - ĐIỀU CHỈNH ĐỂ PHÙ HỢP */}
           <div className="hidden md:block">
-            <BtnLoginAndLogout />
+            <BtnLoginAndLogout isLight={isLight} />
           </div>
 
           {/* Mobile Menu Button - ĐỔI MÀU TRẮNG */}
@@ -94,7 +109,7 @@ const Header = () => {
               </a>
               <div className="pt-4 mt-2 border-t border-white/20">
                 <div className="px-4">
-                  <BtnLoginAndLogout />
+                  <BtnLoginAndLogout isLight={isLight} />
                 </div>
               </div>
             </div>

@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import { usePathname } from "next/navigation";
 
@@ -14,7 +13,6 @@ const ConditionalLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <Header />
       <main>{children}</main>
       <Footer />
     </>

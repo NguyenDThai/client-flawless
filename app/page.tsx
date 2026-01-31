@@ -1,8 +1,8 @@
-
 import Banner from "@/app/components/Banner";
 import Cart from "@/app/components/Cart";
 import CustomerSay from "@/app/components/CustomerSay";
 import FollowUs from "@/app/components/FollowUs";
+import Header from "@/app/components/Header";
 import IntroWeb from "@/app/components/IntroWeb";
 import LovedByCustomers from "@/app/components/LovedByCustomers";
 import Methods from "@/app/components/Methods";
@@ -13,6 +13,7 @@ import SkincareRegimen from "@/app/components/SkincareRegimen";
 export default function Home() {
   return (
     <>
+      <Header />
       <Banner />
       <NewArrivals />
       <IntroWeb />

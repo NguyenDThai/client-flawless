@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { toVND } from "@/lib/formatToVnd";
 import Image from "next/image";
 import React from "react";
 import { FaRegStar } from "react-icons/fa";
@@ -35,7 +36,7 @@ const ProductCart = ({ product }: any) => {
             />
           ))}
         </div>
-        <span>{product.price.toLocaleString()}đ</span>
+        <span>{toVND(product.price)}</span>
       </div>
     </div>
   );

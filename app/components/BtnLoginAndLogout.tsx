@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import ModelUser from "@/app/components/ModelUser";
@@ -7,7 +8,7 @@ import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 
-const BtnLoginAndLogout = () => {
+const BtnLoginAndLogout = ({ isLight }: any) => {
   const { user } = useAuth();
 
   const [showModel, setShowModel] = useState(false);
@@ -20,21 +21,28 @@ const BtnLoginAndLogout = () => {
             <FaUser
               size={20}
               onClick={() => setShowModel((prev) => !prev)}
-              className="cursor-pointer text-white"
+              className={`cursor-pointer ${isLight ? "text-black" : "text-white"}`}
             />
-            <FaCartShopping size={20} className="cursor-pointer text-white" />
+            <FaCartShopping
+              size={20}
+              className={`cursor-pointer ${isLight ? "text-black" : "text-white"}`}
+            />
           </div>
           {showModel && <ModelUser />}
         </div>
       ) : (
         <>
           <Link href="/login">
-            <button className="text-white hover:text-blue-600 font-medium mr-4 cursor-pointer">
+            <button
+              className={`${isLight ? "text-black" : "text-white"} hover:text-blue-600 font-medium mr-4 cursor-pointer`}
+            >
               Đăng nhập
             </button>
           </Link>
           <Link href="/register">
-            <button className="text-white hover:text-blue-600 font-medium cursor-pointer">
+            <button
+              className={`${isLight ? "text-black" : "text-white"} hover:text-blue-600 font-medium mr-4 cursor-pointer`}
+            >
               Đăng ký
             </button>
           </Link>
