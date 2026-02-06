@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import api from "@/lib/api";
 import { CategoryProduct } from "@/types/categories.type";
 import React, { useEffect, useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const CategoryPage = () => {
@@ -37,6 +39,17 @@ const CategoryPage = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDeleteId = async (id: any) => {
+    const res = await api.delete(`/category/${id}`);
+
+    if (res.status === 400) {
+      toast.error("Không thể xóa loại sản phẩm này");
+      return;
+    }
+    toast.success("Bạn đã xóa sản phẩm thành công");
+    fetchCategory();
   };
 
   useEffect(() => {
@@ -215,20 +228,11 @@ const CategoryPage = () => {
                             </svg>
                             Sửa
                           </button>
-                          <button className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2">
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                              />
-                            </svg>
+                          <button
+                            onClick={() => handleDeleteId(category.id)}
+                            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2"
+                          >
+                            <FaTrashAlt />
                             Xóa
                           </button>
                         </div>
@@ -259,39 +263,6 @@ const CategoryPage = () => {
             </div>
           )}
         </div>
-
-        {/* Stats */}
-        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-3xl font-bold">{categories.length}</div>
-                <div className="text-blue-100">Tổng danh mục</div>
-              </div>
-              <div className="text-3xl">📊</div>
-            </div>
-          </div>
-          <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl shadow-lg p-6 text-white">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-3xl font-bold">
-                  {categories.filter((cat) => cat.name?.length > 20).length}
-                </div>
-                <div className="text-green-100">Danh mục dài</div>
-              </div>
-              <div className="text-3xl">📝</div>
-            </div>
-          </div>
-          <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-3xl font-bold">+{categories.length}</div>
-                <div className="text-purple-100">Đã thêm</div>
-              </div>
-              <div className="text-3xl">🚀</div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

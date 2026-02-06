@@ -10,11 +10,20 @@ import Image from "next/image";
 const ProductManagementPage = () => {
   const [showCreateProduct, setShowCreateProduct] = useState(false);
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const pageSize = 16;
 
   const fetchProduct = async () => {
     const res = await api.get("/product");
     setProducts(res.data);
   };
+
+  const totalPages = Math.ceil(products.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+
+  const productInPage = products.slice(startIndex, endIndex);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -38,7 +47,7 @@ const ProductManagementPage = () => {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {products.map((product) => (
+          {productInPage.map((product) => (
             <div
               key={product.id}
               className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group"
@@ -192,6 +201,45 @@ const ProductManagementPage = () => {
           setShowCreateProduct={setShowCreateProduct}
           fetchProducts={fetchProduct}
         />
+      )}
+
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-10 gap-2">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((p) => p - 1)}
+            className="px-3 py-2 rounded-md border text-sm disabled:opacity-40 hover:bg-gray-100"
+          >
+            ←
+          </button>
+
+          {Array.from({ length: totalPages }).map((_, index) => {
+            const page = index + 1;
+            return (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`px-3 py-2 rounded-md text-sm border
+            ${
+              currentPage === page
+                ? "bg-blue-600 text-white border-blue-600"
+                : "hover:bg-gray-100"
+            }
+          `}
+              >
+                {page}
+              </button>
+            );
+          })}
+
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((p) => p + 1)}
+            className="px-3 py-2 rounded-md border text-sm disabled:opacity-40 hover:bg-gray-100"
+          >
+            →
+          </button>
+        </div>
       )}
     </div>
   );

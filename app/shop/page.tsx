@@ -14,11 +14,30 @@ const ProductsPage = () => {
   const [selectedCategories, setSelectedCategories] = useState<number | null>(
     null,
   );
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(5000000);
+  const [appliedPrice, setAppliedPrice] = useState<{
+    min: number;
+    max: number;
+  } | null>(null);
 
-  const ITEMS_PER_PAGE = 6;
-  const filteredProducts = selectedCategories
-    ? products.filter((product) => product.categoryId === selectedCategories)
-    : products;
+  const ITEMS_PER_PAGE = 9;
+
+  const filteredProducts = products.filter((product) => {
+    if (selectedCategories && product.categoryId !== selectedCategories) {
+      return false;
+    }
+    if (appliedPrice) {
+      if (
+        product.price < appliedPrice.min ||
+        product.price > appliedPrice.max
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  });
 
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -52,28 +71,59 @@ const ProductsPage = () => {
           <div className="container mx-auto max-w-[1300px] flex flex-col md:flex-row">
             <div className="w-full md:w-[25%] mb-[64px] flex flex-col pr-8">
               {/* Filter by price */}
+
               <div className="bg-white p-8 mb-8">
-                <h2 className="text-2xl font-normal mb-3.5">Filter by price</h2>
-                <div className="relative mb-12">
-                  <div className="absolute left-0 w-4 h-4 rounded-full bg-black"></div>
-                  <div className="absolute left-0 mt-1.5 w-full border-2 border-black"></div>
-                  <div className="absolute right-0 w-4 h-4 rounded-full bg-black"></div>
+                <h2 className="text-2xl font-normal mb-3.5">Lọc theo giá</h2>
+                {/* Min price */}
+                <div className="mb-4">
+                  <label className="block mb-1">Giá tối thiểu</label>
+                  <input
+                    type="range"
+                    min={0}
+                    max={5000000}
+                    step={50000}
+                    value={minPrice}
+                    onChange={(e) => setMinPrice(Number(e.target.value))}
+                    className="w-full"
+                  />
+                </div>
+
+                {/* Max price */}
+                <div className="mb-6">
+                  <label className="block mb-1">Giá tối đa</label>
+                  <input
+                    type="range"
+                    min={0}
+                    max={5000000}
+                    step={50000}
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(Number(e.target.value))}
+                    className="w-full"
+                  />
                 </div>
                 <div className="flex items-center gap-3">
-                  <button className="py-1 px-4 bg-blue-600 text-white rounded-md border border-transparent hover:bg-white hover:border-blue-600 hover:text-blue-500 transition-all duration-500">
-                    Filter
+                  <button
+                    onClick={() => {
+                      setAppliedPrice({ min: minPrice, max: maxPrice });
+                      setCurrenPage(1);
+                    }}
+                    className="py-1 px-4 bg-blue-600 text-white rounded-md border border-transparent hover:bg-white hover:border-blue-600 hover:text-blue-500 transition-all duration-500"
+                  >
+                    Lọc
                   </button>
-                  <div className="flex items-center">
-                    <span>
-                      Price:
-                      <span className="text-center">100,000-1,000,000đ</span>
+                  <span>
+                    Price:{" "}
+                    <span className="font-medium">
+                      {minPrice.toLocaleString()}đ - {maxPrice.toLocaleString()}
+                      đ
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
+
               <div className="bg-white p-8 mb-8">
                 <h2 className="text-2xl font-normal mb-3.5">
-                  Filter by categories
+                  Tìm kiếm theo loại
                 </h2>
                 <ul>
                   <li
@@ -84,7 +134,7 @@ const ProductsPage = () => {
                     className={`mb-2 pl-4 cursor-pointer transition-all duration-300
                         ${selectedCategories === null ? "text-blue-600 font-medium" : "hover:text-blue-500"}`}
                   >
-                    All products
+                    Tất cả sản phẩm
                   </li>
 
                   {categories.map((ca) => (
