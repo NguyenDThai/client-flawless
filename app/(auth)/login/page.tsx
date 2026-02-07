@@ -29,9 +29,9 @@ const LoginPage = () => {
       if (res.data.user.role === "ADMIN") {
         setTimeout(() => {
           route.push("/admin");
-        }, 0);
+        }, 100);
       } else {
-        route.push("/");
+        route.replace("/");
       }
       toast.success("Đăng nhập thành công");
       setUser(res.data.user);
