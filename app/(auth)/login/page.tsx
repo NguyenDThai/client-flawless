@@ -27,7 +27,7 @@ const LoginPage = () => {
       const res = await api.post("/auth/login", data);
 
       if (res.data.user.role === "ADMIN") {
-        route.push("/admin");
+        await route.replace("/admin");
       } else {
         route.push("/");
       }
