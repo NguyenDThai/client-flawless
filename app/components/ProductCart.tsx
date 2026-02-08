@@ -6,7 +6,7 @@ import { IoBag } from "react-icons/io5";
 
 const ProductCart = ({ product }: any) => {
   return (
-    <div className="w-[350px]">
+    <div className="w-[300px]">
       <div className="relative overflow-hidden group">
         <Image
           src={product.image}
