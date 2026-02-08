@@ -1,7 +1,7 @@
 "use client";
 import Header from "@/app/components/Header";
 import Methods from "@/app/components/Methods";
-import ProductCart from "@/app/components/ProductCart";
+import ProductCartInShop from "@/app/components/ProductCartInShop";
 import api from "@/lib/api";
 import { CategoryProduct } from "@/types/categories.type";
 import { ProductType } from "@/types/products.type";
@@ -176,7 +176,7 @@ const ProductsPage = () => {
                 <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-5">
                   {currentProduct.map((product) => (
                     <div key={product.id}>
-                      <ProductCart product={product} />
+                      <ProductCartInShop product={product} />
                     </div>
                   ))}
                 </div>

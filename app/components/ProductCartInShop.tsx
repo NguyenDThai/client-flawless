@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { toVND } from "@/lib/formatToVnd";
 import Image from "next/image";
+import React from "react";
 import { FaRegStar } from "react-icons/fa";
 import { IoBag } from "react-icons/io5";
 
-const ProductCart = ({ product }: any) => {
+const ProductCartInShop = ({ product }: any) => {
   return (
-    <div className="w-[350px]">
+    <div className="">
       <div className="relative overflow-hidden group">
         <Image
           src={product.image}
           alt="product-image"
           width={500}
           height={500}
-          className="w-fit h-[450px] object-contain mb-4 group-hover:scale-105 transition-transform duration-300"
+          className="w-[350px] h-[450px] object-contain mb-4 group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <button className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 hover:bg-gray-100 transition-colors shadow-lg">
@@ -41,4 +42,4 @@ const ProductCart = ({ product }: any) => {
   );
 };
 
-export default ProductCart;
+export default ProductCartInShop;
