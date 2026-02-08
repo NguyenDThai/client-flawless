@@ -13,7 +13,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await api.get("/user/me");
+        const res = await api.get("/user/me", {
+          headers: { "Cache-Control": "no-cache" },
+        });
         setUser(res.data);
       } catch (error: any) {
         if (error.response?.status === 401) {
