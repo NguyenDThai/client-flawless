@@ -14,8 +14,8 @@ const LoginPage = () => {
     password: "",
   });
 
-  const route = useRouter();
   const { setUser } = useAuth();
+  const router = useRouter();
 
   const handChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -26,17 +26,18 @@ const LoginPage = () => {
     try {
       const res = await api.post("/auth/login", data);
 
-      if (res.data.user.role === "ADMIN") {
-        setTimeout(() => {
-          route.push("/admin");
-        }, 100);
+      if (res.status === 201 && res?.data.user.role === "ADMIN") {
+        toast.success("Đăng nhập thành công");
+        setUser(res.data.user);
+        router.push("/admin");
+      } else if (res.status === 201 && res?.data.user.role === "USER") {
+        setUser(res.data.user);
+        router.push("/");
       } else {
-        route.replace("/");
+        throw new Error("Đã có lỗi khi đăng nhập");
       }
-      toast.success("Đăng nhập thành công");
-      setUser(res.data.user);
     } catch (error: any) {
-      const err = error.response.data.message;
+      const err = error.response?.data.message;
       toast.error(err);
     }
   };

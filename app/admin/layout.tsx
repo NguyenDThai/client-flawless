@@ -6,19 +6,24 @@ import AdminSideBar from "@/app/admin/_components/AdminSideBar";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
-  const route = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
-    if (!loading) {
-      if (!user) {
-        route.replace("/");
-      } else if (user.role !== "ADMIN") {
-        route.replace("/");
-      }
-    }
-  }, [user, loading, route]);
+    if (loading) return;
 
-  if (loading) return <p>Đang tải vui lòng chờ</p>;
+    if (!user) {
+      router.replace("/login");
+      return;
+    }
+
+    if (user?.role !== "ADMIN") {
+      router.replace("/");
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user || user.role !== "ADMIN") {
+    return <p>Đang tải vui lòng chờ...</p>;
+  }
 
   return (
     <div className="min-h-screen flex flex-row-reverse bg-gray-100">

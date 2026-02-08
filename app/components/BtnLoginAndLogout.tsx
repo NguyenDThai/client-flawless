@@ -9,9 +9,11 @@ import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 
 const BtnLoginAndLogout = ({ isLight }: any) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   const [showModel, setShowModel] = useState(false);
+
+  if (loading) return null;
 
   return (
     <div>
