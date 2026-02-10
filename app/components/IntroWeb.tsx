@@ -10,9 +10,9 @@ const IntroWeb = () => {
             <Image
               src="/img/intro-web-skin-cleanser-template-face-lotion-image.png"
               alt="intro-web"
-              width={400}
-              height={400}
-              className="w-[540px] h-[600px] object-cover rounded-md"
+              width={500}
+              height={500}
+              className="w-full md:w-[540px] md:h-[600px] object-cover rounded-md"
             />
           </div>
           <div className="pt-10 md:pl-10 lg:p-20 lg:w-1/2 w-full">

@@ -31,6 +31,7 @@ const LoginPage = () => {
         setUser(res.data.user);
         router.push("/admin");
       } else if (res.status === 201 && res?.data.user.role === "USER") {
+        toast.success("Đăng nhập thành công");
         setUser(res.data.user);
         router.push("/");
       } else {

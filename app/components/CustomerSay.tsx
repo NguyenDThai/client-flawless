@@ -32,16 +32,16 @@ const CustomerSay = () => {
 
   return (
     <div className="bg-[#e7f6ff]">
-      <div className="container mx-auto px-[40px] py-[104px]">
+      <div className="container mx-auto py-[60px] px-[24px] md:px-[40px] md:py-[104px]">
         <div className="flex flex-col justify-center items-center">
           <div className="mb-5">
             <h2 className="text-[40px]">What Our Customers Say</h2>
           </div>
-          <div className="flex items-center justify-between mt-5">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mt-5">
             {CustomerSay.map((cus) => (
               <div
                 key={cus.id}
-                className="min-w-[300px] flex flex-col justify-center items-center pr-8"
+                className="min-w-[300px] flex flex-col justify-center items-center pr-8 pb-12 md:pb-0"
               >
                 <div className="flex">
                   {[...Array(5)].map((_, index) => (

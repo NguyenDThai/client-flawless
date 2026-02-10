@@ -69,7 +69,7 @@ const NewArrivals = () => {
   ];
 
   return (
-    <div className="py-[120px] container mx-auto px-[40px]">
+    <div className="py-[120px] container mx-auto px-5 md:px-[40px]">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <h2 className="text-5xl">New Arrivals</h2>
         <button className="w-[140px] h-[52px] mt-5 md:mt-0 bg-blue-500 text-white rounded-md hover:bg-white hover:text-blue-500 hover:border hover:border-blue-500 transition-all duration-200">
