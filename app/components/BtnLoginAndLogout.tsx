@@ -25,10 +25,17 @@ const BtnLoginAndLogout = ({ isLight }: any) => {
               onClick={() => setShowModel((prev) => !prev)}
               className={`cursor-pointer ${isLight ? "text-black" : "text-white"}`}
             />
-            <FaCartShopping
-              size={20}
-              className={`cursor-pointer ${isLight ? "text-black" : "text-white"}`}
-            />
+            <div className="relative">
+              <FaCartShopping
+                size={20}
+                className={`cursor-pointer ${isLight ? "text-black" : "text-white"}`}
+              />
+              <span
+                className={`absolute -top-2.5 -right-3 w-4 h-4 flex items-center justify-center rounded-full ${isLight ? "bg-blue-600 text-white" : "bg-white text-black"}`}
+              >
+                0
+              </span>
+            </div>
           </div>
           {showModel && <ModelUser />}
         </div>

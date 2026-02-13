@@ -35,25 +35,25 @@ const Header = ({ variant = "transparent" }: HeaderProp) => {
           <nav className="hidden md:flex space-x-10">
             <Link
               href="/"
-              className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
+              className={`${isLight ? "text-blue-500 hover:text-black" : "text-white hover:text-gray-200"} transition-all duration-300`}
             >
               HOME
             </Link>
             <Link
               href="/shop"
-              className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
+              className={`${isLight ? "text-blue-500 hover:text-black" : "text-white hover:text-gray-200"}`}
             >
               SHOP
             </Link>
             <Link
               href="#"
-              className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
+              className={`${isLight ? "text-blue-500 hover:text-black" : "text-white hover:text-gray-200"}`}
             >
               ABOUT
             </Link>
             <Link
               href="#"
-              className={`${isLight ? "text-black hover:text-gray-600" : "text-white hover:text-gray-200"}`}
+              className={`${isLight ? "text-blue-500 hover:text-black" : "text-white hover:text-gray-200"}`}
             >
               CONTACT
             </Link>
