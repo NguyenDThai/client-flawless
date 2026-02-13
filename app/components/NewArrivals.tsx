@@ -69,19 +69,17 @@ const NewArrivals = () => {
   ];
 
   return (
-    <div className="py-[120px] container mx-auto px-5 md:px-[40px]">
+    <div className="py-30 container mx-auto px-5 md:px-10">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <h2 className="text-5xl">New Arrivals</h2>
-        <button className="w-[140px] h-[52px] mt-5 md:mt-0 bg-blue-500 text-white rounded-md hover:bg-white hover:text-blue-500 hover:border hover:border-blue-500 transition-all duration-200">
+        <button className="w-36 h-13 mt-5 md:mt-0 bg-blue-500 text-white rounded-md hover:bg-white hover:text-blue-500 hover:border hover:border-blue-500 transition-all duration-200">
           Shop now
         </button>
       </div>
-      <div className="mt-12">
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {products.map((product) => (
-            <ProductCart product={product} key={product.id} />
-          ))}
-        </div>
+      <div className="mt-12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        {products.map((product) => (
+          <ProductCart product={product} key={product.id} />
+        ))}
       </div>
     </div>
   );
