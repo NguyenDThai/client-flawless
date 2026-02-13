@@ -8,7 +8,7 @@ import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 
-const BtnLoginAndLogout = ({ isLight }: any) => {
+const BtnLoginAndLogout = ({ isLight, setShowModelCart }: any) => {
   const { user, loading } = useAuth();
 
   const [showModel, setShowModel] = useState(false);
@@ -16,7 +16,7 @@ const BtnLoginAndLogout = ({ isLight }: any) => {
   if (loading) return null;
 
   return (
-    <div>
+    <div className="">
       {user ? (
         <div className="relative">
           <div className="flex items-center gap-7">
@@ -29,6 +29,7 @@ const BtnLoginAndLogout = ({ isLight }: any) => {
               <FaCartShopping
                 size={20}
                 className={`cursor-pointer ${isLight ? "text-black" : "text-white"}`}
+                onClick={() => setShowModelCart(true)}
               />
               <span
                 className={`absolute -top-2.5 -right-3 w-4 h-4 flex items-center justify-center rounded-full ${isLight ? "bg-blue-600 text-white" : "bg-white text-black"}`}
