@@ -6,17 +6,25 @@ import { ProductType } from "@/types/products.type";
 import CreateProduct from "@/app/admin/_components/CreateProduct";
 import { toVND } from "@/lib/formatToVnd";
 import Image from "next/image";
+import UpdateProduct from "@/app/admin/_components/UpdateProduct";
 
 const ProductManagementPage = () => {
   const [showCreateProduct, setShowCreateProduct] = useState(false);
   const [products, setProducts] = useState<ProductType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showModelProduct, setShowModelProduct] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const pageSize = 16;
 
   const fetchProduct = async () => {
     const res = await api.get("/product");
     setProducts(res.data);
+  };
+
+  const handleEdit = (id: number) => {
+    setShowModelProduct(true);
+    setSelectedId(id);
   };
 
   const totalPages = Math.ceil(products.length / pageSize);
@@ -31,7 +39,7 @@ const ProductManagementPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6">
+    <div className="min-h-screen bg-gray-50 p-4 md:p-6 relative">
       <button
         className="bg-blue-500 p-2 text-white rounded-md float-right"
         onClick={() => setShowCreateProduct(true)}
@@ -144,7 +152,10 @@ const ProductManagementPage = () => {
                         />
                       </svg>
                     </button>
-                    <button className="p-2 text-gray-400 hover:text-green-500 hover:bg-green-50 rounded-lg transition-colors">
+                    <button
+                      onClick={() => handleEdit(product.id)}
+                      className="p-2 text-gray-400 hover:text-green-500 hover:bg-green-50 rounded-lg transition-colors"
+                    >
                       <svg
                         className="w-5 h-5"
                         fill="none"
@@ -240,6 +251,15 @@ const ProductManagementPage = () => {
             →
           </button>
         </div>
+      )}
+
+      {showModelProduct && (
+        <UpdateProduct
+          setShowModelProduct={setShowModelProduct}
+          showModelProduct={showModelProduct}
+          selectedId={selectedId}
+          fetchProduct={fetchProduct}
+        />
       )}
     </div>
   );
