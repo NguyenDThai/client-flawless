@@ -21,7 +21,9 @@ const UpdateProduct = ({
     categoryId: "",
     stock: "",
     image: "",
+    isFeatured: false,
   });
+
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [categories, setCategories] = useState<any[]>([]);
@@ -39,6 +41,7 @@ const UpdateProduct = ({
       stock: data.stock || "",
       categoryId: data.categoryId || "",
       image: data.image || "",
+      isFeatured: data.isFeatured,
     });
 
     setImagePreview(data.image);
@@ -68,6 +71,7 @@ const UpdateProduct = ({
     formDataToSend.append("price", formData.price);
     formDataToSend.append("stock", formData.stock);
     formDataToSend.append("categoryId", formData.categoryId);
+    formDataToSend.append("isFeatured", String(formData.isFeatured));
 
     if (imageFile) {
       formDataToSend.append("image", imageFile);
@@ -228,6 +232,22 @@ const UpdateProduct = ({
                 onChange={(e) =>
                   setFormData({ ...formData, stock: e.target.value })
                 }
+              />
+            </div>
+            <div className="flex items-center gap-3">
+              <label className="block text-sm font-semibold text-gray-700">
+                Sản phẩm mới về
+              </label>
+              <input
+                type="checkbox"
+                checked={formData.isFeatured}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    isFeatured: e.target.checked,
+                  })
+                }
+                className="w-4 h-4"
               />
             </div>
           </div>

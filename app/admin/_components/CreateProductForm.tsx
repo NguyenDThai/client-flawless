@@ -43,7 +43,6 @@ const CreateProductForm = ({
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("🚀 ~ handleOnSubmit ~ res:", res);
 
       if (res.status === 201) {
         toast.success("Đã thêm sản phẩm thành công");
