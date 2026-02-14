@@ -6,7 +6,7 @@ import { useState } from "react";
 
 type HeaderProp = {
   variant?: "transparent" | "light";
-  handleShowCart: () => void;
+  handleShowCart?: () => void;
 };
 
 const Header = ({ variant = "transparent", handleShowCart }: HeaderProp) => {
