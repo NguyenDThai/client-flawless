@@ -1,22 +1,67 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import api from "@/lib/api";
+import { CartItem } from "@/types/carts.type";
+import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+type Cart = {
+  id: number;
+  productId: number;
+  quantity: number;
+  items: CartItem[];
+  totalAmount: number;
+};
 
 type CartContext = {
   showCart: boolean;
   closeCart: () => void;
   openCart: () => void;
+  cartItem: Cart | null;
+  addToCart: (productId: number, quantity: number) => Promise<void>;
 };
 
 const CartContext = createContext<CartContext | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [showCart, setShowCart] = useState(false);
+  const [cartItem, setCartItem] = useState<Cart | null>(null);
   const openCart = () => setShowCart(true);
   const closeCart = () => setShowCart(false);
 
+  const addToCart = async (productId: number, quantity: number) => {
+    try {
+      const res = await api.post("/cart/add", {
+        productId,
+        quantity,
+      });
+
+      setCartItem(res.data);
+      setShowCart(true);
+      toast.success("Bạn đã thêm sản phẩm vào giỏ hàng");
+    } catch (error) {
+      toast.error("Thêm vào giỏ hàng thất bại");
+    }
+  };
+
+  const fetchCart = async () => {
+    try {
+      const res = await api.get("/cart");
+      setCartItem(res.data);
+    } catch (error) {
+      console.log("Không có cart hoặc chưa login");
+    }
+  };
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
   return (
-    <CartContext.Provider value={{ showCart, openCart, closeCart }}>
+    <CartContext.Provider
+      value={{ showCart, openCart, closeCart, addToCart, cartItem }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -1,3 +1,5 @@
+"use client";
+import { useCart } from "@/context/CartContext";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { toVND } from "@/lib/formatToVnd";
 import Image from "next/image";
@@ -5,6 +7,8 @@ import { FaRegStar } from "react-icons/fa";
 import { IoBag } from "react-icons/io5";
 
 const ProductCart = ({ product }: any) => {
+  const { addToCart } = useCart();
+
   return (
     <div className="w-[300px]">
       <div className="relative overflow-hidden group">
@@ -16,7 +20,10 @@ const ProductCart = ({ product }: any) => {
           className="w-fit h-[450px] object-contain mb-4 group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-          <button className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 hover:bg-gray-100 transition-colors shadow-lg">
+          <button
+            onClick={() => addToCart(product.id, 1)}
+            className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 hover:bg-gray-100 transition-colors shadow-lg"
+          >
             <IoBag size={18} />
             <span className="font-medium">Thêm vào giỏ hàng</span>
           </button>
