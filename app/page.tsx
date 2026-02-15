@@ -12,17 +12,14 @@ import Methods from "@/app/components/Methods";
 import NewArrivals from "@/app/components/NewArrivals";
 import OptionBanner from "@/app/components/OptionBanner";
 import SkincareRegimen from "@/app/components/SkincareRegimen";
-import { useEffect, useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { useEffect } from "react";
 
 export default function Home() {
-  const [showModelCart, setShowModelCart] = useState(false);
-
-  const handleShowCart = () => {
-    setShowModelCart(true);
-  };
+  const { showCart } = useCart();
 
   useEffect(() => {
-    if (showModelCart) {
+    if (showCart) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -31,11 +28,11 @@ export default function Home() {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [showModelCart]);
+  }, [showCart]);
   return (
     <>
       <div className="relative">
-        <Header handleShowCart={handleShowCart} />
+        <Header />
       </div>
       <Banner />
       <NewArrivals />
@@ -47,13 +44,6 @@ export default function Home() {
       <FollowUs />
       <Methods />
       <Cart />
-
-      {showModelCart && (
-        <CartModel
-          setShowModelCart={setShowModelCart}
-          showModelCart={showModelCart}
-        />
-      )}
     </>
   );
 }

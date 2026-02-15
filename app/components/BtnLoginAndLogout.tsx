@@ -3,13 +3,15 @@
 
 import ModelUser from "@/app/components/ModelUser";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 
-const BtnLoginAndLogout = ({ isLight, setShowModelCart }: any) => {
+const BtnLoginAndLogout = ({ isLight }: any) => {
   const { user, loading } = useAuth();
+  const { openCart } = useCart();
 
   const [showModel, setShowModel] = useState(false);
 
@@ -29,7 +31,7 @@ const BtnLoginAndLogout = ({ isLight, setShowModelCart }: any) => {
               <FaCartShopping
                 size={20}
                 className={`cursor-pointer ${isLight ? "text-black" : "text-white"}`}
-                onClick={() => setShowModelCart(true)}
+                onClick={openCart}
               />
               <span
                 className={`absolute -top-2.5 -right-3 w-4 h-4 flex items-center justify-center rounded-full ${isLight ? "bg-blue-600 text-white" : "bg-white text-black"}`}

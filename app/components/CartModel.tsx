@@ -1,31 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useCart } from "@/context/CartContext";
 import { MdArrowRightAlt } from "react-icons/md";
 
-const CartModel = ({ showModelCart, setShowModelCart }: any) => {
+const CartModel = () => {
+  const { showCart, closeCart } = useCart();
   return (
     <div
       className={`fixed top-0 right-0 z-50 h-screen w-full 
         transition-all duration-500 ease-in-out
         ${
-          showModelCart
+          showCart
             ? "visible bg-black/50"
             : "invisible bg-black/0 pointer-events-none"
         }`}
-      onClick={() => setShowModelCart(false)}
+      onClick={closeCart}
     >
       <div
         className={`absolute top-0 h-screen w-[450px] flex flex-col bg-white shadow-xl
           transition-all duration-400 ease-out transform transform-gpu
-          ${showModelCart ? "right-0" : "-right-[450px]"}`}
+          ${showCart ? "right-0" : "-right-[450px]"}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header cart*/}
         <div className="flex items-center justify-between p-5 border-b border-gray-300">
           <div className="cursor-pointer hover:opacity-70 transition-opacity">
-            <MdArrowRightAlt
-              size={30}
-              onClick={() => setShowModelCart(false)}
-            />
+            <MdArrowRightAlt size={30} onClick={closeCart} />
           </div>
           <div>
             <span className="font-medium">Giỏ hàng của bạn</span>

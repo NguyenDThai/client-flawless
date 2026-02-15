@@ -6,10 +6,9 @@ import { useState } from "react";
 
 type HeaderProp = {
   variant?: "transparent" | "light";
-  handleShowCart?: () => void;
 };
 
-const Header = ({ variant = "transparent", handleShowCart }: HeaderProp) => {
+const Header = ({ variant = "transparent" }: HeaderProp) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isLight = variant === "light";
 
@@ -62,10 +61,7 @@ const Header = ({ variant = "transparent", handleShowCart }: HeaderProp) => {
 
           {/* Desktop Action - ĐIỀU CHỈNH ĐỂ PHÙ HỢP */}
           <div className="hidden md:block">
-            <BtnLoginAndLogout
-              isLight={isLight}
-              setShowModelCart={handleShowCart}
-            />
+            <BtnLoginAndLogout isLight={isLight} />
           </div>
 
           {/* Mobile Menu Button - ĐỔI MÀU TRẮNG */}

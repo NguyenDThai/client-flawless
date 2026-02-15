@@ -3,9 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "@/context/AuthContext";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
 import ConditionalLayout from "@/app/components/ConditionalLayout";
+import { CartProvider } from "@/context/CartContext";
+import CartWrapper from "@/app/components/CartWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +33,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <ConditionalLayout>{children}</ConditionalLayout>
+          <ConditionalLayout>
+            <CartProvider>
+              {children}
+              <CartWrapper />
+            </CartProvider>
+          </ConditionalLayout>
         </AuthProvider>
         <ToastContainer position="top-center" />
       </body>
