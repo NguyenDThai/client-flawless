@@ -129,7 +129,7 @@ const CartModel = () => {
         <div className="shadow-xl">
           <div className="flex items-center justify-between py-2.5 px-5 border-b border-gray-300">
             <span>Tổng cộng:</span>
-            <span>{cartItem?.totalAmount?.toLocaleString()}</span>
+            <span>{cartItem?.totalAmount.toLocaleString()}</span>
           </div>
           <div className="px-5 py-3.5">
             <button className="w-full p-3 bg-blue-500 text-white rounded-md cursor-pointer border border-transparent hover:bg-white hover:border hover:border-blue-500 hover:text-blue-500 transition-all duration-300">

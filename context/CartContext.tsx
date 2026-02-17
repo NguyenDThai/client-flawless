@@ -30,6 +30,15 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const openCart = () => setShowCart(true);
   const closeCart = () => setShowCart(false);
 
+  const fetchCart = async () => {
+    try {
+      const res = await api.get("/cart");
+      setCartItem(res.data);
+    } catch (error) {
+      console.log("Không có cart hoặc chưa login");
+    }
+  };
+
   const addToCart = async (productId: number, quantity: number) => {
     try {
       const res = await api.post("/cart/add", {
@@ -37,20 +46,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         quantity,
       });
 
-      setCartItem(res.data);
       setShowCart(true);
       toast.success("Bạn đã thêm sản phẩm vào giỏ hàng");
+      fetchCart();
     } catch (error) {
       toast.error("Thêm vào giỏ hàng thất bại");
-    }
-  };
-
-  const fetchCart = async () => {
-    try {
-      const res = await api.get("/cart");
-      setCartItem(res.data);
-    } catch (error) {
-      console.log("Không có cart hoặc chưa login");
     }
   };
 
