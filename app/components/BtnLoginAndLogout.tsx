@@ -11,7 +11,7 @@ import { FaCartShopping } from "react-icons/fa6";
 
 const BtnLoginAndLogout = ({ isLight }: any) => {
   const { user, loading } = useAuth();
-  const { openCart } = useCart();
+  const { openCart, cartItem } = useCart();
 
   const [showModel, setShowModel] = useState(false);
 
@@ -36,7 +36,7 @@ const BtnLoginAndLogout = ({ isLight }: any) => {
               <span
                 className={`absolute -top-2.5 -right-3 w-4 h-4 flex items-center justify-center rounded-full ${isLight ? "bg-blue-600 text-white" : "bg-white text-black"}`}
               >
-                0
+                {cartItem?.totalQuantity}
               </span>
             </div>
           </div>

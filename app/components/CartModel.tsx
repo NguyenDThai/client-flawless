@@ -4,7 +4,7 @@ import Image from "next/image";
 import { MdArrowRightAlt } from "react-icons/md";
 
 const CartModel = () => {
-  const { showCart, closeCart, cartItem } = useCart();
+  const { showCart, closeCart, cartItem, removeCart } = useCart();
 
   return (
     <div
@@ -32,7 +32,7 @@ const CartModel = () => {
             <span className="font-medium">Giỏ hàng của bạn</span>
           </div>
           <div className="w-6 h-6 flex items-center justify-center bg-gray-500 text-white rounded-md">
-            <span>0</span>
+            <span>{cartItem?.totalQuantity}</span>
           </div>
         </div>
 
@@ -100,7 +100,10 @@ const CartModel = () => {
                         </div>
                       </div>
 
-                      <button className="mt-2 text-xs text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1">
+                      <button
+                        className="mt-2 text-xs text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1"
+                        onClick={() => removeCart(item.product.id)}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4"
@@ -133,7 +136,9 @@ const CartModel = () => {
           </div>
           <div className="px-5 py-3.5">
             <button className="w-full p-3 bg-blue-500 text-white rounded-md cursor-pointer border border-transparent hover:bg-white hover:border hover:border-blue-500 hover:text-blue-500 transition-all duration-300">
-              Giỏ hàng bạn đang trống. Mua ngay
+              {(cartItem?.items?.length ?? 0) < 1
+                ? "Giỏ hàng bạn đang trống. Mua ngay"
+                : "Thanh toán ngay"}
             </button>
           </div>
         </div>

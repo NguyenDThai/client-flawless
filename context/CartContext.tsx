@@ -12,6 +12,7 @@ type Cart = {
   quantity: number;
   items: CartItem[];
   totalAmount: number;
+  totalQuantity: number;
 };
 
 type CartContext = {
@@ -20,6 +21,7 @@ type CartContext = {
   openCart: () => void;
   cartItem: Cart | null;
   addToCart: (productId: number, quantity: number) => Promise<void>;
+  removeCart: (productId: number) => Promise<void>;
 };
 
 const CartContext = createContext<CartContext | undefined>(undefined);
@@ -41,7 +43,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   const addToCart = async (productId: number, quantity: number) => {
     try {
-      const res = await api.post("/cart/add", {
+      await api.post("/cart/add", {
         productId,
         quantity,
       });
@@ -54,13 +56,24 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const removeCart = async (productId: number) => {
+    try {
+      await api.delete(`/cart/remove/${productId}`);
+
+      toast.success("Bạn đã xóa sản phẩm khỏi giỏ hàng");
+      fetchCart();
+    } catch (error) {
+      toast.error("Lỗi khi xóa sản phẩm");
+    }
+  };
+
   useEffect(() => {
     fetchCart();
   }, []);
 
   return (
     <CartContext.Provider
-      value={{ showCart, openCart, closeCart, addToCart, cartItem }}
+      value={{ showCart, openCart, closeCart, addToCart, cartItem, removeCart }}
     >
       {children}
     </CartContext.Provider>
