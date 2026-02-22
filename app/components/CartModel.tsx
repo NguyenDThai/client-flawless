@@ -4,7 +4,8 @@ import Image from "next/image";
 import { MdArrowRightAlt } from "react-icons/md";
 
 const CartModel = () => {
-  const { showCart, closeCart, cartItem, removeCart } = useCart();
+  const { showCart, closeCart, cartItem, removeCart, increase, decrease } =
+    useCart();
 
   return (
     <div
@@ -88,13 +89,19 @@ const CartModel = () => {
                         </span>
 
                         <div className="flex items-center border border-gray-200 rounded-md">
-                          <button className="px-2 py-1 text-gray-600 hover:bg-gray-100 transition-colors">
+                          <button
+                            onClick={() => decrease(item.product.id)}
+                            className="px-2 py-1 text-gray-600 hover:bg-gray-100 transition-colors"
+                          >
                             -
                           </button>
                           <span className="px-3 py-1 text-sm border-x border-gray-200">
-                            1
+                            {item.quantity}
                           </span>
-                          <button className="px-2 py-1 text-gray-600 hover:bg-gray-100 transition-colors">
+                          <button
+                            onClick={() => increase(item.product.id)}
+                            className="px-2 py-1 text-gray-600 hover:bg-gray-100 transition-colors"
+                          >
                             +
                           </button>
                         </div>

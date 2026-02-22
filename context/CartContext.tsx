@@ -22,6 +22,8 @@ type CartContext = {
   cartItem: Cart | null;
   addToCart: (productId: number, quantity: number) => Promise<void>;
   removeCart: (productId: number) => Promise<void>;
+  increase: (productId: number) => Promise<void>;
+  decrease: (productId: number) => Promise<void>;
 };
 
 const CartContext = createContext<CartContext | undefined>(undefined);
@@ -67,13 +69,32 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const increase = async (productId: number) => {
+    await api.patch(`/cart/increase/${productId}`);
+    fetchCart();
+  };
+
+  const decrease = async (productId: number) => {
+    await api.patch(`/cart/decrease/${productId}`);
+    fetchCart();
+  };
+
   useEffect(() => {
     fetchCart();
   }, []);
 
   return (
     <CartContext.Provider
-      value={{ showCart, openCart, closeCart, addToCart, cartItem, removeCart }}
+      value={{
+        showCart,
+        openCart,
+        closeCart,
+        addToCart,
+        cartItem,
+        removeCart,
+        increase,
+        decrease,
+      }}
     >
       {children}
     </CartContext.Provider>
