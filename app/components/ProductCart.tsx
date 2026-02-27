@@ -23,7 +23,10 @@ const ProductCart = ({ product }: any) => {
           />
           <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
             <button
-              onClick={() => addToCart(product.id, 1)}
+              onClick={(e) => {
+                e.preventDefault();
+                addToCart(product.id, 1);
+              }}
               className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 hover:bg-gray-100 transition-colors shadow-lg"
             >
               <IoBag size={18} />

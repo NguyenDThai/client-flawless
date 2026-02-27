@@ -2,6 +2,7 @@
 
 import Header from "@/app/components/Header";
 import ReviewForm from "@/app/components/ReviewForm";
+import { useCart } from "@/context/CartContext";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/set-state-in-effect */
 
@@ -22,6 +23,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState<any>(null);
   const [quantity, setQuantity] = useState(1);
   const [active, setActive] = useState<"description" | "review">("description");
+  const { addToCart } = useCart();
 
   // Fake total review
   const [reviews, setReviews] = useState(0);
@@ -105,7 +107,10 @@ const ProductDetail = () => {
                     className="w-14 min-h-9 p-1.5 border border-dotted"
                   />
                 </div>
-                <button className="w-1/2 bg-blue-600 text-white py-4 px-6 rounded-xl cursor-pointer border border-transparent hover:bg-white hover:text-blue-600 hover:border  hover:border-blue-600 transition-all duration-300 uppercase text-sm tracking-wider font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                <button
+                  onClick={() => addToCart(product.id, quantity)}
+                  className="w-1/2 bg-blue-600 text-white py-4 px-6 rounded-xl cursor-pointer border border-transparent hover:bg-white hover:text-blue-600 hover:border  hover:border-blue-600 transition-all duration-300 uppercase text-sm tracking-wider font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                >
                   Thêm vào giỏ hàng
                 </button>
               </div>
