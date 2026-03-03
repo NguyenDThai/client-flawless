@@ -2,6 +2,7 @@
 import BtnLogout from "@/app/admin/_components/BtnLogout";
 import Link from "next/link";
 import { useState } from "react";
+import { BiSolidDiscount } from "react-icons/bi";
 import {
   FaTachometerAlt,
   FaUsers,
@@ -42,6 +43,12 @@ const AdminSideBar = ({ user }: any) => {
       label: "Quản lý danh mục",
       href: "/admin/category",
       icon: <MdOutlineCategory />,
+    },
+    {
+      id: "discounts",
+      label: "Quản lý giảm giá",
+      href: "/admin/discount",
+      icon: <BiSolidDiscount />,
     },
     {
       id: "orders",
