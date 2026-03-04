@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { IoMdAdd, IoMdClose } from "react-icons/io";
 import { toast } from "react-toastify";
 
-const CreateDisCountForm = ({ setShowModal }: any) => {
+const CreateDisCountForm = ({ setShowModal, fetchDisCount }: any) => {
   const [data, setData] = useState({
     code: "",
     type: "PERCENT",
@@ -59,6 +59,7 @@ const CreateDisCountForm = ({ setShowModal }: any) => {
           endDate: "",
         });
         setShowModal(false);
+        fetchDisCount();
       } else {
         throw new Error("Lỗi khi thêm mã giảm giá");
       }

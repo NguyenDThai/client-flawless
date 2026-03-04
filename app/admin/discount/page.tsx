@@ -7,13 +7,7 @@ import ShowTableDiscount from "@/app/admin/_components/ShowTableDiscount";
 import api from "@/lib/api";
 import { DiscountType } from "@/types/discount.type";
 import { useEffect, useState } from "react";
-import {
-  FiChevronLeft,
-  FiChevronRight,
-  FiEdit2,
-  FiMoreVertical,
-  FiTrash2,
-} from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { IoMdAdd } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { toast } from "react-toastify";
@@ -28,6 +22,7 @@ const DisCountPage = () => {
   };
 
   const handleDeleteDiscount = async (id: number) => {
+    if (!confirm("Bạn có chắc xóa mã giảm giá này không ?")) return;
     const res = await api.delete(`/discount/${id}`);
 
     if (res.status === 200) {
@@ -245,7 +240,12 @@ const DisCountPage = () => {
       </div>
 
       {/* Modal */}
-      {showModal && <CreateDisCountForm setShowModal={setShowModal} />}
+      {showModal && (
+        <CreateDisCountForm
+          setShowModal={setShowModal}
+          fetchDisCount={fetchDisCount}
+        />
+      )}
     </div>
   );
 };
