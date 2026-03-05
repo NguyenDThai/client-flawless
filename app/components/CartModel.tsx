@@ -1,14 +1,31 @@
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import InputDiscount from "@/app/components/InputDiscount";
 import { useCart } from "@/context/CartContext";
+import api from "@/lib/api";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { MdArrowRightAlt } from "react-icons/md";
-import { RiArrowDropDownLine } from "react-icons/ri";
 
 const CartModel = () => {
   const { showCart, closeCart, cartItem, removeCart, increase, decrease } =
     useCart();
+  const [pricing, setPricing] = useState<any>(null);
+
+  const [valueDiscount, setValueDiscount] = useState("");
+
+  const handleApplyDiscount = async () => {
+    try {
+      const res = await api.post("/cart/apply-discount", {
+        code: valueDiscount,
+      });
+
+      setPricing(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div
@@ -148,10 +165,32 @@ const CartModel = () => {
 
         {/* Footer cart */}
         <div className="shadow-xl">
-          <InputDiscount />
-          <div className="flex items-center justify-between py-2.5 px-5 border-b border-gray-300">
+          <InputDiscount
+            setValueDiscount={setValueDiscount}
+            valueDiscount={valueDiscount}
+            handleApplyDiscount={handleApplyDiscount}
+            pricing={pricing}
+            setPricing={setPricing}
+          />
+          <div className="flex items-center justify-between  py-2.5 px-5">
+            <span>Tạm tính:</span>
+            <span>
+              {(pricing?.subtotal ?? cartItem?.totalAmount)?.toLocaleString()}
+            </span>
+          </div>
+
+          {pricing?.discountAmount > 0 && (
+            <div className="flex items-center justify-between py-2.5 px-5 text-green-600">
+              <span>Giảm giá:</span>
+              <span>-{pricing.discountAmount.toLocaleString()}</span>
+            </div>
+          )}
+
+          <div className="flex items-center justify-between py-2.5 px-5 border-t border-gray-300 font-semibold">
             <span>Tổng cộng:</span>
-            <span>{cartItem?.totalAmount.toLocaleString()}</span>
+            <span>
+              {(pricing?.total ?? cartItem?.totalAmount)?.toLocaleString()}
+            </span>
           </div>
           <div className="px-5 py-3.5">
             <button className="w-full p-3 bg-blue-500 text-white rounded-md cursor-pointer border border-transparent hover:bg-white hover:border hover:border-blue-500 hover:text-blue-500 transition-all duration-300">

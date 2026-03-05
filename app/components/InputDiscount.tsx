@@ -1,9 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 
-const InputDiscount = () => {
+const InputDiscount = ({
+  valueDiscount,
+  setValueDiscount,
+  handleApplyDiscount,
+  pricing,
+  setPricing,
+}: any) => {
   const [showDiscount, setShowDiscount] = useState(false);
+
+  const handleRemoveDiscount = () => {
+    setPricing(null);
+    setValueDiscount("");
+  };
+
   return (
     <>
       <div
@@ -23,12 +36,26 @@ const InputDiscount = () => {
         <div className="flex items-center py-2.5 px-5 gap-2">
           <input
             type="text"
+            value={valueDiscount}
+            onChange={(e) => setValueDiscount(e.target.value)}
             placeholder="Nhập mã voucher"
             className="border border-gray-500 rounded-md p-3 flex-1 outline-none"
           />
-          <button className="bg-blue-600 text-white p-3 rounded-md border border-transparent hover:bg-white hover:text-blue-600 hover:border-blue-600 cursor-pointer transition-all duration-300">
-            Xác nhận
-          </button>
+          {pricing ? (
+            <button
+              onClick={handleRemoveDiscount}
+              className="bg-blue-600 text-white p-3 rounded-md border border-transparent hover:bg-white hover:text-blue-600 hover:border-blue-600 cursor-pointer transition-all duration-300"
+            >
+              Hủy
+            </button>
+          ) : (
+            <button
+              onClick={handleApplyDiscount}
+              className="bg-blue-600 text-white p-3 rounded-md border border-transparent hover:bg-white hover:text-blue-600 hover:border-blue-600 cursor-pointer transition-all duration-300"
+            >
+              Xác nhận
+            </button>
+          )}
         </div>
       )}
     </>
