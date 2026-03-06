@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import api from "@/lib/api";
 import { useState } from "react";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 
@@ -12,7 +13,9 @@ const InputDiscount = ({
 }: any) => {
   const [showDiscount, setShowDiscount] = useState(false);
 
-  const handleRemoveDiscount = () => {
+  const handleRemoveDiscount = async () => {
+    await api.delete("/cart/remove-discount");
+
     setPricing(null);
     setValueDiscount("");
   };
