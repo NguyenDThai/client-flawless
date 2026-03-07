@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/app/components/Header";
+import ProductCartInShop from "@/app/components/ProductCartInShop";
 import ReviewForm from "@/app/components/ReviewForm";
 import { useCart } from "@/context/CartContext";
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -21,6 +22,7 @@ import {
 const ProductDetail = () => {
   const { slug } = useParams();
   const [product, setProduct] = useState<any>(null);
+  const [relatedProduct, setRelatedProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [active, setActive] = useState<"description" | "review">("description");
   const { addToCart } = useCart();
@@ -30,7 +32,8 @@ const ProductDetail = () => {
 
   const fetchProduct = async () => {
     const res = await api.get(`/product/detail/${slug}`);
-    setProduct(res.data);
+    setProduct(res.data.product);
+    setRelatedProduct(res.data.relatedProducts);
   };
 
   const onChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,19 +73,16 @@ const ProductDetail = () => {
 
             {/* Right Column - Product Info với spacing tốt hơn */}
             <div className="space-y-8">
-              {/* Category với thiết kế tinh tế */}
               <div>
                 <span className="inline-block text-xs font-medium text-gray-400 uppercase tracking-wider">
                   {product.category.name}
                 </span>
               </div>
 
-              {/* Product Name với typography đẹp */}
               <h1 className="text-4xl font-light text-gray-900 leading-tight">
                 {product.name}
               </h1>
 
-              {/* Price & Shipping với thiết kế nổi bật */}
               <div className="flex items-baseline gap-4">
                 <span className="text-3xl font-bold text-gray-900">
                   {toVND(product.price)}
@@ -92,12 +92,10 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              {/* Description với line-height đẹp */}
               <div className="prose prose-sm text-gray-600">
                 <p className="leading-relaxed">{product.description}</p>
               </div>
 
-              {/* Add to Cart Button with change quantity */}
               <div className="flex items-center ">
                 <div className="mr-4">
                   <input
@@ -115,7 +113,6 @@ const ProductDetail = () => {
                 </button>
               </div>
 
-              {/* Category Info với divider */}
               <div className="flex items-center gap-2 text-sm border-t border-gray-100 pt-6">
                 <span className="text-gray-400">Danh mục:</span>
                 <span className="text-gray-800 font-medium bg-gray-100 px-3 py-1 rounded-full">
@@ -123,7 +120,6 @@ const ProductDetail = () => {
                 </span>
               </div>
 
-              {/* Guaranteed Safe Checkout với thiết kế hiện đại */}
               <div className="relative rounded-xl p-6 border border-gray-300">
                 <p className="absolute -top-3.5 right-1/2 translate-x-1/2 text-md font-medium bg-white text-gray-600 mb-4 flex items-center gap-2">
                   <svg
@@ -183,13 +179,28 @@ const ProductDetail = () => {
             </li>
           </ul>
 
-          {active === "description" ? (
-            <div className="leading-8 text-gray-700">{product.description}</div>
-          ) : (
-            <>
-              <ReviewForm reviews={reviews} product={product} />
-            </>
-          )}
+          <div className="mb-16">
+            {active === "description" ? (
+              <div className="leading-8 text-gray-700">
+                {product.description}
+              </div>
+            ) : (
+              <>
+                <ReviewForm reviews={reviews} product={product} />
+              </>
+            )}
+          </div>
+
+          <div>
+            <h2 className="text-4xl mb-7">Sản phẩm liên quan</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {relatedProduct.map((product: any) => (
+                <div key={product.id}>
+                  <ProductCartInShop product={product} />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>

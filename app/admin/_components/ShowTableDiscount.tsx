@@ -204,21 +204,37 @@ const ShowTableDiscount = ({ handleDeleteDiscount, allDiscount }: any) => {
                   {/* Trạng thái */}
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
-                      className={`px-3 py-1.5 text-xs font-semibold rounded-xl ${
-                        item.isActive
-                          ? "bg-green-100 text-green-700 border border-green-200"
-                          : "bg-red-100 text-red-700 border border-red-200"
+                      className={`inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium shadow-sm ${
+                        item.status === "active"
+                          ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20"
+                          : item.status === "scheduled"
+                            ? "bg-amber-50 text-amber-700 ring-1 ring-amber-600/20"
+                            : "bg-rose-50 text-rose-700 ring-1 ring-rose-600/20"
                       }`}
                     >
-                      {item.isActive ? (
-                        <span className="flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
+                      {item.status === "active" ? (
+                        <span className="flex items-center gap-1.5">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+                          </span>
                           Đang áp dụng
                         </span>
+                      ) : item.status === "scheduled" ? (
+                        <span className="flex items-center gap-1.5">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-600"></span>
+                          </span>
+                          Đã lên lịch
+                        </span>
                       ) : (
-                        <span className="flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 bg-red-600 rounded-full"></span>
-                          Ngừng áp dụng
+                        <span className="flex items-center gap-1.5">
+                          <span className="relative flex h-2 w-2">
+                            <span className="absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-600"></span>
+                          </span>
+                          Hết hạn
                         </span>
                       )}
                     </span>

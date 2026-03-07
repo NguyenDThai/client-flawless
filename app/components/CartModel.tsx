@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { MdArrowRightAlt } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const CartModel = () => {
   const { showCart, closeCart, cartItem, removeCart, increase, decrease } =
@@ -22,8 +23,11 @@ const CartModel = () => {
       });
 
       setPricing(res.data);
-    } catch (error) {
-      console.error(error);
+      toast.success("Áp dụng mã giảm giá thành công");
+    } catch (error: any) {
+      const message =
+        error.response?.data?.message || "Có lỗi xảy ra khi áp dụng mã";
+      toast.error(message);
     }
   };
 

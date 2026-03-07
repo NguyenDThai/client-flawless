@@ -2,6 +2,7 @@
 import { useCart } from "@/context/CartContext";
 import { toVND } from "@/lib/formatToVnd";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaRegStar } from "react-icons/fa";
 import { IoBag } from "react-icons/io5";
@@ -9,7 +10,7 @@ import { IoBag } from "react-icons/io5";
 const ProductCartInShop = ({ product }: any) => {
   const { addToCart } = useCart();
   return (
-    <div className="">
+    <Link href={`/product/${product.slug}`}>
       <div className="relative overflow-hidden group">
         <Image
           src={product.image}
@@ -20,7 +21,10 @@ const ProductCartInShop = ({ product }: any) => {
         />
         <div className="absolute bottom-0 left-0 right-0 p-4 z-20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <button
-            onClick={() => addToCart(product.id, 1)}
+            onClick={(e) => {
+              e.preventDefault();
+              addToCart(product.id, 1);
+            }}
             className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 hover:bg-gray-100 transition-colors shadow-lg"
           >
             <IoBag size={18} />
@@ -30,9 +34,7 @@ const ProductCartInShop = ({ product }: any) => {
       </div>
       <div className="flex flex-col">
         <span className="mb-1 opacity-30">{product.category}</span>
-        <a href="#" className="mb-2">
-          {product.name}
-        </a>
+        <span className="mb-2">{product.name}</span>
         <div className="flex">
           {[...Array(5)].map((_, index) => (
             <FaRegStar
@@ -43,7 +45,7 @@ const ProductCartInShop = ({ product }: any) => {
         </div>
         <span>{toVND(product.price)}</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
