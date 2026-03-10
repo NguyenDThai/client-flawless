@@ -9,7 +9,9 @@ const EditDiscount = ({
   editFormData,
   setEditFormData,
   discountId,
+  statusDiscount,
 }: any) => {
+  const isScheduled = statusDiscount === "scheduled";
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -105,7 +107,7 @@ const EditDiscount = ({
                   name="code"
                   value={editFormData.code}
                   onChange={handleInputChange}
-                  required
+                  disabled={!isScheduled}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                   placeholder="Nhập mã giảm giá"
                 />
@@ -120,7 +122,7 @@ const EditDiscount = ({
                   name="type"
                   value={editFormData.type}
                   onChange={handleInputChange}
-                  required
+                  disabled={!isScheduled}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                 >
                   <option value="">Chọn loại giảm giá</option>
@@ -140,7 +142,7 @@ const EditDiscount = ({
                     name="value"
                     value={editFormData.value}
                     onChange={handleInputChange}
-                    required
+                    disabled={!isScheduled}
                     min="0"
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition pr-12"
                     placeholder={
@@ -182,6 +184,7 @@ const EditDiscount = ({
                   name="minAmount"
                   value={editFormData.minAmount ?? ""}
                   onChange={handleInputChange}
+                  disabled={!isScheduled}
                   min="0"
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                   placeholder="Nhập giá trị đơn hàng tối thiểu (để trống nếu không giới hạn)"
@@ -199,6 +202,7 @@ const EditDiscount = ({
                     name="maxDiscount"
                     value={editFormData.maxDiscount ?? ""}
                     onChange={handleInputChange}
+                    disabled={!isScheduled}
                     min="0"
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                     placeholder="Nhập số tiền giảm tối đa"
@@ -217,7 +221,7 @@ const EditDiscount = ({
                     name="startDate"
                     value={editFormData.startDate}
                     onChange={handleInputChange}
-                    required
+                    disabled={!isScheduled}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                   />
                 </div>

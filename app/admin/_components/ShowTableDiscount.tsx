@@ -205,14 +205,14 @@ const ShowTableDiscount = ({ handleDeleteDiscount, allDiscount }: any) => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
                       className={`inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium shadow-sm ${
-                        item.status === "active"
+                        item.status === "active" && item.isActive
                           ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/20"
                           : item.status === "scheduled"
                             ? "bg-amber-50 text-amber-700 ring-1 ring-amber-600/20"
                             : "bg-rose-50 text-rose-700 ring-1 ring-rose-600/20"
                       }`}
                     >
-                      {item.status === "active" ? (
+                      {item.status === "active" && item.isActive ? (
                         <span className="flex items-center gap-1.5">
                           <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
@@ -282,6 +282,7 @@ const ShowTableDiscount = ({ handleDeleteDiscount, allDiscount }: any) => {
           setEditFormData={setEditFormData}
           editFormData={editFormData}
           discountId={editItem.id}
+          statusDiscount={editItem.status}
         />
       )}
     </>

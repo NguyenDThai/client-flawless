@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 const DisCountPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [allDiscount, setAllDiscount] = useState<DiscountType[] | []>([]);
-  console.log("🚀 ~ DisCountPage ~ allDiscount:", allDiscount);
 
   const fetchDisCount = async () => {
     const res = await api.get("/discount");
