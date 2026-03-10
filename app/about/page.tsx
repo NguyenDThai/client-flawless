@@ -1,6 +1,7 @@
 import FollowUs from "@/app/components/FollowUs";
 import Header from "@/app/components/Header";
 import Methods from "@/app/components/Methods";
+import StatsSection from "@/app/components/StatsSection";
 import Image from "next/image";
 import React from "react";
 import { FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa";
@@ -125,24 +126,7 @@ const AboutPage = () => {
                 What started as a passion has grown into a trusted brand,
                 helping people feel confident in their skin every single day.
               </p>
-              <div className="flex items-center justify-between mt-5">
-                <div>
-                  <span className="text-blue-500 text-[40px]">1200+</span>
-                  <p className="text-[#364151]">Loyal Customers</p>
-                </div>
-                <div>
-                  <span className="text-blue-500 text-[40px]">4.9</span>
-                  <p className="text-[#364151]">Average Rating</p>
-                </div>
-                <div>
-                  <span className="text-blue-500 text-[40px]">90%</span>
-                  <p className="text-[#364151]">Repeat Buyers</p>
-                </div>
-                <div>
-                  <span className="text-blue-500 text-[40px]">20+</span>
-                  <p className="text-[#364151]">Countries Glowing</p>
-                </div>
-              </div>
+              <StatsSection />
             </div>
           </div>
         </div>
