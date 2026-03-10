@@ -36,7 +36,7 @@ const BtnLoginAndLogout = ({ isLight }: any) => {
               <span
                 className={`absolute -top-2.5 -right-3 w-4 h-4 flex items-center justify-center rounded-full ${isLight ? "bg-blue-600 text-white" : "bg-white text-black"}`}
               >
-                {cartItem?.totalQuantity}
+                {cartItem?.totalQuantity || 0}
               </span>
             </div>
           </div>
