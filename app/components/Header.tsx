@@ -46,7 +46,7 @@ const Header = ({ variant = "transparent" }: HeaderProp) => {
               SHOP
             </Link>
             <Link
-              href="#"
+              href="/about"
               className={`${isLight ? "text-blue-500 hover:text-black" : "text-white hover:text-gray-200"}`}
             >
               ABOUT
