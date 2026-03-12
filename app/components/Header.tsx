@@ -52,7 +52,7 @@ const Header = ({ variant = "transparent" }: HeaderProp) => {
               ABOUT
             </Link>
             <Link
-              href="#"
+              href="/contact"
               className={`${isLight ? "text-blue-500 hover:text-black" : "text-white hover:text-gray-200"}`}
             >
               CONTACT

@@ -10,7 +10,7 @@ import { SiComma } from "react-icons/si";
 
 const AboutPage = () => {
   return (
-    <div className="">
+    <div>
       <Header variant="transparent" />
 
       <div className="relative w-full max-h-[700px] lg:h-screen overflow-hidden">
