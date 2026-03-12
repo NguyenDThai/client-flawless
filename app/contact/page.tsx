@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import ContactForm from "@/app/components/ContactForm";
 import Header from "@/app/components/Header";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -32,7 +33,7 @@ const ContactPage = () => {
   ];
 
   const [openId, setOpenId] = useState(null);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<any>({});
 
   const toggleFAQ = (id: any) => {
     setOpenId(openId === id ? null : id);
@@ -174,52 +175,8 @@ const ContactPage = () => {
               ))}
             </div>
           </div>
-          {/* form */}
-          <div className="w-2/3 flex flex-col pl-20">
-            <div className="border border-blue-500 w-16 my-6"></div>
-            <form action="" className="flex flex-col gap-6">
-              <div className="">
-                <label htmlFor="">Name</label>
-                <input
-                  type="text"
-                  className="py-2.5 px-3 border w-full rounded-md my-1.5"
-                />
-                {error && (
-                  <div className="text-red-500 text-[12px]">
-                    This field is required
-                  </div>
-                )}
-              </div>
-              <div className="">
-                <label htmlFor="">Email</label>
-                <input
-                  type="email"
-                  className="py-2.5 px-3 border w-full rounded-md my-1.5"
-                />
-                {error && (
-                  <div className="text-red-500 text-[12px]">
-                    This field is required
-                  </div>
-                )}
-              </div>
-              <div className="">
-                <label htmlFor="">Comment or Message</label>
-                <textarea className="h-24 py-2.5 px-3 border w-full rounded-md my-1.5" />
-                {error && (
-                  <div className="text-red-500 text-[12px]">
-                    This field is required
-                  </div>
-                )}
-              </div>
-
-              <button
-                type="submit"
-                className="bg-blue-600 text-white w-[100px] py-3 rounded-md cursor-pointer hover:bg-blue-500"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
+          {/* Form */}
+          <ContactForm error={error} setError={setError} />
         </div>
       </div>
     </div>

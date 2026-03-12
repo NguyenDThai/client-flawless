@@ -14,6 +14,7 @@ import {
   FaBars,
 } from "react-icons/fa";
 import { MdOutlineCategory } from "react-icons/md";
+import { VscFeedback } from "react-icons/vsc";
 
 const AdminSideBar = ({ user }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -49,6 +50,12 @@ const AdminSideBar = ({ user }: any) => {
       label: "Quản lý giảm giá",
       href: "/admin/discount",
       icon: <BiSolidDiscount />,
+    },
+    {
+      id: "feedback",
+      label: "Quản lý phản hồi",
+      href: "/admin/feedback",
+      icon: <VscFeedback />,
     },
     {
       id: "orders",
