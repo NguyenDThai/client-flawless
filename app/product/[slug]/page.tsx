@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/app/components/Header";
+import Methods from "@/app/components/Methods";
 import ProductCartInShop from "@/app/components/ProductCartInShop";
 import ReviewForm from "@/app/components/ReviewForm";
 import { useCart } from "@/context/CartContext";
@@ -55,7 +56,7 @@ const ProductDetail = () => {
     <>
       <Header variant="light" />
       <div className="bg-[#e7f6ff] pt-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-12 bg-white">
+        <div className="max-w-7xl mx-auto my-16 px-4 sm:px-6 lg:px-20 py-12 bg-white">
           {/* Product Detail */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-8">
             {/* Left Column - Image với hiệu ứng */}
@@ -202,6 +203,8 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
+        <div className="border border-[#d1dae5]"></div>
+        <Methods />
       </div>
     </>
   );
