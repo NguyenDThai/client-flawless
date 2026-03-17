@@ -12,7 +12,7 @@ const ProductCart = ({ product }: any) => {
 
   return (
     <Link href={`/product/${product.slug}`}>
-      <div className="w-[300px]">
+      <div className="w-full md:w-[300px]">
         <div className="relative overflow-hidden group">
           <Image
             src={product.image}

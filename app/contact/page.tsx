@@ -59,7 +59,7 @@ const ContactPage = () => {
         <div
           className="absolute inset-0 opacity-70"
           style={{
-            background: "linear-gradient(180deg, #080619 10%, #00000057 100%)",
+            background: "linear-gradient(180deg, #000000 0%, #00000087 100%",
           }}
         ></div>
 
