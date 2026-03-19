@@ -5,30 +5,48 @@ import { useCart } from "@/context/CartContext";
 import api from "@/lib/api";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdArrowRightAlt } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const CartModel = () => {
-  const { showCart, closeCart, cartItem, removeCart, increase, decrease } =
-    useCart();
-  const [pricing, setPricing] = useState<any>(null);
+  const {
+    showCart,
+    closeCart,
+    cartItem,
+    removeCart,
+    increase,
+    decrease,
+    fetchCart,
+  } = useCart();
+
+  const router = useRouter();
 
   const [valueDiscount, setValueDiscount] = useState("");
 
   const handleApplyDiscount = async () => {
     try {
-      const res = await api.post("/cart/apply-discount", {
+      await api.post("/cart/apply-discount", {
         code: valueDiscount,
       });
-
-      setPricing(res.data);
       toast.success("Áp dụng mã giảm giá thành công");
+      fetchCart();
     } catch (error: any) {
       const message =
         error.response?.data?.message || "Có lỗi xảy ra khi áp dụng mã";
       toast.error(message);
     }
+  };
+
+  const onClickCheckout = () => {
+    if (cartItem?.items.length === 0) {
+      toast.error("Vui lòng thêm sản phẩm vào giỏ hàng");
+      return;
+    }
+
+    router.push("/checkout");
+    closeCart();
   };
 
   return (
@@ -173,31 +191,28 @@ const CartModel = () => {
             setValueDiscount={setValueDiscount}
             valueDiscount={valueDiscount}
             handleApplyDiscount={handleApplyDiscount}
-            pricing={pricing}
-            setPricing={setPricing}
           />
           <div className="flex items-center justify-between  py-2.5 px-5">
             <span>Tạm tính:</span>
-            <span>
-              {(pricing?.subtotal ?? cartItem?.totalAmount)?.toLocaleString()}
-            </span>
+            <span>{cartItem?.totalAmount?.toLocaleString()}</span>
           </div>
 
-          {pricing?.discountAmount > 0 && (
+          {cartItem?.discount && (
             <div className="flex items-center justify-between py-2.5 px-5 text-green-600">
               <span>Giảm giá:</span>
-              <span>-{pricing.discountAmount.toLocaleString()}</span>
+              <span>-{cartItem?.discountAmount.toLocaleString()}</span>
             </div>
           )}
 
           <div className="flex items-center justify-between py-2.5 px-5 border-t border-gray-300 font-semibold">
             <span>Tổng cộng:</span>
-            <span>
-              {(pricing?.total ?? cartItem?.totalAmount)?.toLocaleString()}
-            </span>
+            <span>{cartItem?.finalAmount.toLocaleString()}</span>
           </div>
           <div className="px-5 py-3.5">
-            <button className="w-full p-3 bg-blue-500 text-white rounded-md cursor-pointer border border-transparent hover:bg-white hover:border hover:border-blue-500 hover:text-blue-500 transition-all duration-300">
+            <button
+              onClick={onClickCheckout}
+              className="w-full p-3 bg-blue-500 text-white rounded-md cursor-pointer border border-transparent hover:bg-white hover:border hover:border-blue-500 hover:text-blue-500 transition-all duration-300"
+            >
               {(cartItem?.items?.length ?? 0) < 1
                 ? "Giỏ hàng bạn đang trống. Mua ngay"
                 : "Thanh toán ngay"}

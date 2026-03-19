@@ -1,21 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import api from "@/lib/api";
 import { CartItem } from "@/types/carts.type";
+import { ApplyDiscountResponse, DiscountType } from "@/types/discount.type";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-type Cart = {
+export type Cart = {
   id: number;
   productId: number;
+  discountId: number;
+  discount: DiscountType;
   quantity: number;
   items: CartItem[];
   totalAmount: number;
   totalQuantity: number;
+  discountAmount: number;
+  finalAmount: number;
 };
 
 type CartContext = {
+  fetchCart: () => void;
   showCart: boolean;
   closeCart: () => void;
   openCart: () => void;
@@ -31,6 +38,7 @@ const CartContext = createContext<CartContext | undefined>(undefined);
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItem, setCartItem] = useState<Cart | null>(null);
+
   const openCart = () => setShowCart(true);
   const closeCart = () => setShowCart(false);
 
@@ -86,6 +94,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <CartContext.Provider
       value={{
+        fetchCart,
         showCart,
         openCart,
         closeCart,

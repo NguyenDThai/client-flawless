@@ -1,9 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
 import Header from "@/app/components/Header";
 import ShowDiscountInOrder from "@/app/components/ShowDiscountInOrder";
-import React from "react";
+import { useCart } from "@/context/CartContext";
 import { RiCheckboxIndeterminateFill } from "react-icons/ri";
 
 const CheckoutPage = () => {
+  const { cartItem } = useCart();
+
+  const item = cartItem?.items;
+  const shippment = 30000;
+
   return (
     <>
       <Header variant="light" />
@@ -11,7 +19,9 @@ const CheckoutPage = () => {
         <div className="max-w-[1240px] mx-auto pt-10">
           <div className="bg-white px-24 py-16">
             <div className="mb-6">
-              <h1 className="leading-5 text-[26px] font-sans">Checkout</h1>
+              <h1 className="leading-5 text-[26px] font-sans uppercase">
+                Thanh toán
+              </h1>
             </div>
             <div>
               {/* Discount code */}
@@ -26,8 +36,8 @@ const CheckoutPage = () => {
                   {/* Left col */}
                   <div className="w-[55%] mr-11">
                     <div className="mb-5">
-                      <h3 className="pt-5 pb-3.5 font-bold text-xl">
-                        Billing Details
+                      <h3 className="pt-5 pb-3.5 font-bold text-xl uppercase">
+                        Chi tiết thanh toán
                       </h3>
                       <div className="border border-[#dddddd]"></div>
                     </div>
@@ -68,59 +78,61 @@ const CheckoutPage = () => {
                   {/* Right col */}
                   <div className="w-[45%] px-7 border border-[#dddddd]">
                     <div>
-                      <h3 className="pt-7 pb-5 text-[19px] font-bold">
-                        Your order
+                      <h3 className="pt-7 pb-5 text-[19px] font-bold uppercase">
+                        Đơn hàng của bạn
                       </h3>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-[#364151] font-semibold">
-                        Product
+                        Sản phẩm
                       </span>
-                      <span className="text-[#364151] font-semibold">
-                        Subtotal
-                      </span>
+                      <span className="text-[#364151] font-semibold">Giá</span>
                     </div>
                     <div className="mb-8">
                       <div className="border border-[#dddddd] mt-3.5"></div>
-                      {/* Render product */}
-                      <div className="flex justify-between items-center mt-3.5">
-                        <span className="max-w-[200px]">
-                          Soothing Sunscreen Gel
-                          <br />
-                          <p>x1</p>
-                        </span>
-                        <span>100,000</span>
-                      </div>
-                      <div className="border border-[#dddddd] mt-3.5"></div>
-                      <div className="flex justify-between items-center mt-3.5">
-                        <span className="max-w-[200px]">
-                          Soothing Sunscreen Gel
-                          <br />
-                          <p>x1</p>
-                        </span>
-                        <span>100,000</span>
-                      </div>
 
+                      {/* Render product */}
+                      {item?.map((item) => (
+                        <div key={item.id}>
+                          <div className="flex justify-between items-center mt-3.5">
+                            <span className="max-w-[250px]">
+                              {item.product.name}
+                              <br />
+                              <p>x{item.quantity}</p>
+                            </span>
+                            <span>
+                              {Number(item.product.price).toLocaleString()}
+                            </span>
+                          </div>
+                          <div className="border border-[#dddddd] my-3.5"></div>
+                        </div>
+                      ))}
                       {/*  */}
-                      <div className="border border-[#dddddd] my-3.5"></div>
+
                       <div className="flex items-center justify-between">
-                        <span>Subtotal</span>
-                        <span>200,000</span>
+                        <span>Tổng cộng</span>
+                        <span>{cartItem?.totalAmount.toLocaleString()}</span>
                       </div>
                       <div className="border border-[#dddddd] my-3.5"></div>
                       <div className="flex items-center justify-between">
-                        <span>Coupon: </span>
-                        <span>-100,000</span>
+                        <span>Giảm giá: </span>
+                        <span>
+                          -{cartItem?.discountAmount.toLocaleString() || 0}
+                        </span>
                       </div>
                       <div className="border border-[#dddddd] my-3.5"></div>
                       <div className="flex items-center justify-between">
-                        <span>Shipment</span>
-                        <span>30,000</span>
+                        <span>Vận chuyển</span>
+                        <span>+{shippment.toLocaleString()}</span>
                       </div>
                       <div className="border border-[#dddddd] my-3.5"></div>
                       <div className="flex items-center justify-between">
-                        <span>Total</span>
-                        <span>130,000</span>
+                        <span>Tổng đơn hàng</span>
+                        <span>
+                          {(
+                            (cartItem?.finalAmount ?? 0) + shippment
+                          ).toLocaleString()}
+                        </span>
                       </div>
                       <div className="border border-[#dddddd] my-3.5"></div>
                     </div>
