@@ -2,12 +2,15 @@
 "use client";
 
 import Header from "@/app/components/Header";
+import ShowAllDiscountInCheckout from "@/app/components/ShowAllDiscountInCheckout";
 import ShowDiscountInOrder from "@/app/components/ShowDiscountInOrder";
 import { useCart } from "@/context/CartContext";
+import { useState } from "react";
 import { RiCheckboxIndeterminateFill } from "react-icons/ri";
 
 const CheckoutPage = () => {
   const { cartItem } = useCart();
+  const [showAllDiscount, setShowAllDiscount] = useState(false);
 
   const item = cartItem?.items;
   const shippment = 30000;
@@ -139,6 +142,10 @@ const CheckoutPage = () => {
 
                     <button
                       type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowAllDiscount(true);
+                      }}
                       className="w-full py-3 px-6 my-2 border cursor-pointer"
                     >
                       Xem các mã giảm giá có sẵn
@@ -163,7 +170,7 @@ const CheckoutPage = () => {
                       type="submit"
                       className="w-full py-4 px-7 bg-blue-600 text-white uppercase font-medium rounded-md mb-8 border border-transparent hover:border-blue-600 hover:bg-white hover:text-blue-600 cursor-pointer transition-all duration-300"
                     >
-                      Place Order
+                      Thanh Toán
                     </button>
                   </div>
                 </form>
@@ -172,6 +179,13 @@ const CheckoutPage = () => {
           </div>
         </div>
       </div>
+
+      {showAllDiscount && (
+        <ShowAllDiscountInCheckout
+          showAllDiscount={showAllDiscount}
+          setShowAllDiscount={setShowAllDiscount}
+        />
+      )}
     </>
   );
 };
