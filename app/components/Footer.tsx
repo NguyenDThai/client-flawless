@@ -56,9 +56,9 @@ const Footer = () => {
               Categories
             </h1>
             <ul className="flex flex-col items-center md:items-start gap-2.5 text-white">
-              <a href="#">
+              <Link href="/body">
                 <li>Body Lotion</li>
-              </a>
+              </Link>
               <a href="#">
                 <li>Sunscreen</li>
               </a>
