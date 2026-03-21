@@ -1,5 +1,15 @@
+"use client";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
+import {
+  containerVariants,
+  textContainerVariants,
+  textVariants,
+  linkVariants,
+  gridVariants,
+  imageVariants,
+} from "@/animations/followUsAnimations";
 
 const FollowUs = () => {
   const imageSkinCare = [
@@ -30,33 +40,65 @@ const FollowUs = () => {
   ];
 
   return (
-    <div className="container mx-auto px-[40px] py-[120px]">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{
+        once: true,
+        amount: 0.5,
+        margin: "-50px",
+      }}
+      className="container mx-auto px-[40px] py-[120px] overflow-hidden"
+    >
       <div className="max-w-[970px] mx-auto">
-        <div className="flex flex-col justify-center items-center">
-          <div>
-            <h4 className="text-2xl font-light">
-              Follow Us.{" "}
-              <a href="#" className="underline text-2xl">
-                @flawlesscleanser
-              </a>
-            </h4>
-          </div>
-          <div className="mt-16 grid sm:grid-cols-2 md:grid-cols-3">
-            {imageSkinCare.map((img) => (
-              <div key={img.id}>
+        <motion.div
+          variants={containerVariants}
+          className="flex flex-col justify-center items-center"
+        >
+          {/* Text section */}
+          <motion.div
+            variants={textContainerVariants}
+            className="flex flex-wrap justify-center items-center gap-2"
+          >
+            <motion.h4 variants={textVariants} className="text-2xl font-light">
+              Follow Us.
+            </motion.h4>
+            <motion.a
+              href="#"
+              variants={linkVariants}
+              whileHover="hover"
+              className="text-2xl underline"
+            >
+              @flawlesscleanser
+            </motion.a>
+          </motion.div>
+
+          {/* Image grid */}
+          <motion.div
+            variants={gridVariants}
+            className="mt-16 grid sm:grid-cols-2 md:grid-cols-3 gap-0"
+          >
+            {imageSkinCare.map((img, index) => (
+              <motion.div
+                key={img.id}
+                variants={imageVariants}
+                whileHover="hover"
+                custom={index}
+                className="overflow-hidden"
+              >
                 <Image
                   src={img.image}
-                  alt="image"
+                  alt={`Skincare product ${img.id}`}
                   width={400}
                   height={400}
-                  className="object-center pr-10 pb-10"
+                  className="object-center pr-10 pb-10 transition-all duration-300"
                 />
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
