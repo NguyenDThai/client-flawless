@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FaRegStar } from "react-icons/fa";
 
-const ReviewForm = ({ reviews, product }: any) => {
+const ReviewForm = ({ product }: any) => {
   return (
     <div>
-      {reviews === 0 && <p className="mb-4">Chưa có đánh giá nào</p>}
       <div className="border border-gray-400">
         <div className="p-6">
           <div>

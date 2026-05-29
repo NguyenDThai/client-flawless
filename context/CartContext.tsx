@@ -2,9 +2,10 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import api from "@/lib/api";
 import { CartItem } from "@/types/carts.type";
-import { ApplyDiscountResponse, DiscountType } from "@/types/discount.type";
+import { DiscountType } from "@/types/discount.type";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -38,6 +39,8 @@ const CartContext = createContext<CartContext | undefined>(undefined);
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [showCart, setShowCart] = useState(false);
   const [cartItem, setCartItem] = useState<Cart | null>(null);
+
+  const { user } = useAuth();
 
   const openCart = () => setShowCart(true);
   const closeCart = () => setShowCart(false);
@@ -88,8 +91,12 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    fetchCart();
-  }, []);
+    if (user) {
+      fetchCart();
+    } else {
+      setCartItem(null);
+    }
+  }, [user]);
 
   return (
     <CartContext.Provider

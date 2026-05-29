@@ -2,7 +2,6 @@
 
 import Banner from "@/app/components/Banner";
 import Cart from "@/app/components/Cart";
-import CartModel from "@/app/components/CartModel";
 import CustomerSay from "@/app/components/CustomerSay";
 import FollowUs from "@/app/components/FollowUs";
 import Header from "@/app/components/Header";

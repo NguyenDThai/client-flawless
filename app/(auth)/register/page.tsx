@@ -23,7 +23,7 @@ const RegisterPage = () => {
   const handlSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await api.post("/user/add", data);
+      await api.post("/user/add", data);
 
       toast.success("Đăng ký thành công");
       route.push("/login");

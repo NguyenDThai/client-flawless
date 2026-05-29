@@ -28,9 +28,6 @@ const ProductDetail = () => {
   const [active, setActive] = useState<"description" | "review">("description");
   const { addToCart } = useCart();
 
-  // Fake total review
-  const [reviews, setReviews] = useState(0);
-
   const fetchProduct = async () => {
     const res = await api.get(`/product/detail/${slug}`);
     setProduct(res.data.product);
@@ -176,7 +173,7 @@ const ProductDetail = () => {
               }`}
               onClick={() => setActive("review")}
             >
-              Đánh giá sản phẩm ({reviews})
+              Đánh giá sản phẩm (0)
             </li>
           </ul>
 
@@ -187,7 +184,7 @@ const ProductDetail = () => {
               </div>
             ) : (
               <>
-                <ReviewForm reviews={reviews} product={product} />
+                <ReviewForm product={product} />
               </>
             )}
           </div>
