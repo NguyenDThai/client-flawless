@@ -1,16 +1,16 @@
 "use client";
 
-import Banner from "@/app/components/Banner";
-import Cart from "@/app/components/Cart";
-import CustomerSay from "@/app/components/CustomerSay";
-import FollowUs from "@/app/components/FollowUs";
-import Header from "@/app/components/Header";
-import IntroWeb from "@/app/components/IntroWeb";
-import LovedByCustomers from "@/app/components/LovedByCustomers";
-import Methods from "@/app/components/Methods";
-import NewArrivals from "@/app/components/NewArrivals";
-import OptionBanner from "@/app/components/OptionBanner";
-import SkincareRegimen from "@/app/components/SkincareRegimen";
+import Banner from "@/components/Banner";
+import Cart from "@/components/Cart";
+import CustomerSay from "@/components/CustomerSay";
+import FollowUs from "@/components/FollowUs";
+import Header from "@/components/Header";
+import IntroWeb from "@/components/IntroWeb";
+import LovedByCustomers from "@/components/LovedByCustomers";
+import Methods from "@/components/Methods";
+import NewArrivals from "@/components/NewArrivals";
+import OptionBanner from "@/components/OptionBanner";
+import SkincareRegimen from "@/components/SkincareRegimen";
 import { useCart } from "@/context/CartContext";
 import { useEffect } from "react";
 

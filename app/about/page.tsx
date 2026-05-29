@@ -1,7 +1,7 @@
-import FollowUs from "@/app/components/FollowUs";
-import Header from "@/app/components/Header";
-import Methods from "@/app/components/Methods";
-import StatsSection from "@/app/components/StatsSection";
+import FollowUs from "@/components/FollowUs";
+import Header from "@/components/Header";
+import Methods from "@/components/Methods";
+import StatsSection from "@/components/StatsSection";
 import Image from "next/image";
 import React from "react";
 import { FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa";

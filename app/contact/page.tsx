@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import ContactForm from "@/app/components/ContactForm";
-import Header from "@/app/components/Header";
+import ContactForm from "@/components/ContactForm";
+import Header from "@/components/Header";
 import Image from "next/image";
 import React, { useState } from "react";
 import { FaClock } from "react-icons/fa";

@@ -1,4 +1,4 @@
-import ProductCart from "@/app/components/ProductCart";
+import ProductCart from "@/components/ProductCart";
 import React from "react";
 
 const LovedByCustomers = () => {

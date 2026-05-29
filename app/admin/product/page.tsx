@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import api from "@/lib/api";
 import { ProductType } from "@/types/products.type";
-import CreateProduct from "@/app/admin/_components/CreateProduct";
+import CreateProduct from "@/app/admin/_components/modal/CreateProduct";
 import { toVND } from "@/lib/formatToVnd";
 import Image from "next/image";
-import UpdateProduct from "@/app/admin/_components/UpdateProduct";
+import UpdateProduct from "@/app/admin/_components/modal/UpdateProduct";
 
 const ProductManagementPage = () => {
   const [showCreateProduct, setShowCreateProduct] = useState(false);

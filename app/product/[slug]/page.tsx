@@ -1,9 +1,9 @@
 "use client";
 
-import Header from "@/app/components/Header";
-import Methods from "@/app/components/Methods";
-import ProductCartInShop from "@/app/components/ProductCartInShop";
-import ReviewForm from "@/app/components/ReviewForm";
+import Header from "@/components/Header";
+import Methods from "@/components/Methods";
+import ProductCartInShop from "@/components/ProductCartInShop";
+import ReviewForm from "@/components/ReviewForm";
 import { useCart } from "@/context/CartContext";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/set-state-in-effect */

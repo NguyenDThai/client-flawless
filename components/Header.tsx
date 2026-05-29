@@ -1,6 +1,6 @@
 "use client";
 
-import BtnLoginAndLogout from "@/app/components/BtnLoginAndLogout";
+import BtnLoginAndLogout from "@/components/BtnLoginAndLogout";
 import Link from "next/link";
 import { useState } from "react";
 

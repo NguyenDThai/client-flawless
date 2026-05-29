@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import Header from "@/app/components/Header";
-import ShowAllDiscountInCheckout from "@/app/components/ShowAllDiscountInCheckout";
-import ShowDiscountInOrder from "@/app/components/ShowDiscountInOrder";
+import Header from "@/components/Header";
+import ShowAllDiscountInCheckout from "@/components/modal/ShowAllDiscountInCheckout";
+import ShowDiscountInOrder from "@/components/ShowDiscountInOrder";
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
 import { RiCheckboxIndeterminateFill } from "react-icons/ri";

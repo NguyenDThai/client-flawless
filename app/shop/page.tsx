@@ -1,7 +1,7 @@
 "use client";
-import Header from "@/app/components/Header";
-import Methods from "@/app/components/Methods";
-import ProductCartInShop from "@/app/components/ProductCartInShop";
+import Header from "@/components/Header";
+import Methods from "@/components/Methods";
+import ProductCartInShop from "@/components/ProductCartInShop";
 import api from "@/lib/api";
 import { CategoryProduct } from "@/types/categories.type";
 import { ProductType } from "@/types/products.type";

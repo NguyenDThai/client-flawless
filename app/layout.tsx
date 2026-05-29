@@ -3,9 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "@/context/AuthContext";
-import ConditionalLayout from "@/app/components/ConditionalLayout";
+import ConditionalLayout from "@/components/ConditionalLayout";
 import { CartProvider } from "@/context/CartContext";
-import CartWrapper from "@/app/components/CartWrapper";
+import CartWrapper from "@/components/CartWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

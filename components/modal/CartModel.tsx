@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import InputDiscount from "@/app/components/InputDiscount";
+import InputDiscount from "@/components/InputDiscount";
 import { useCart } from "@/context/CartContext";
 import api from "@/lib/api";
 import Image from "next/image";

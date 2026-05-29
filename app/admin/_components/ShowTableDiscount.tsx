@@ -1,6 +1,6 @@
 "use client";
 
-import EditDiscount from "@/app/admin/_components/EditDiscount";
+import EditDiscount from "@/app/admin/_components/modal/EditDiscount";
 import { useState } from "react";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

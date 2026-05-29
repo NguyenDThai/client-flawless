@@ -1,6 +1,6 @@
 "use client";
 
-import CartModel from "@/app/components/CartModel";
+import CartModel from "@/components/modal/CartModel";
 import { useCart } from "@/context/CartContext";
 
 const CartWrapper = () => {

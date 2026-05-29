@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import ProductCart from "@/app/components/ProductCart";
+import ProductCart from "@/components/ProductCart";
 import api from "@/lib/api";
 import { useEffect, useState } from "react";
 

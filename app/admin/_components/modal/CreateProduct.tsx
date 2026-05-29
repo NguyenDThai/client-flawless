@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import CreateProductForm from "@/app/admin/_components/CreateProductForm";
+import CreateProductForm from "@/app/admin/_components/modal/CreateProductForm";
 import api from "@/lib/api";
 import { CategoryProduct } from "@/types/categories.type";
 import React, { useEffect, useState } from "react";

@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
-import CreateDisCountForm from "@/app/admin/_components/CreateDisCountForm";
+import CreateDisCountForm from "@/app/admin/_components/modal/CreateDisCountForm";
 import ShowTableDiscount from "@/app/admin/_components/ShowTableDiscount";
 import api from "@/lib/api";
 import { DiscountType } from "@/types/discount.type";
