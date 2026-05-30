@@ -1,4 +1,5 @@
 import ProductCart from "@/components/ProductCart";
+import { ProductType } from "@/types/products.type";
 import React from "react";
 
 const LovedByCustomers = () => {
@@ -47,7 +48,7 @@ const LovedByCustomers = () => {
       <div className="mt-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {products.map((product) => (
           <div key={product.id}>
-            <ProductCart product={product} />
+            <ProductCart product={product as unknown as ProductType} />
           </div>
         ))}
       </div>
