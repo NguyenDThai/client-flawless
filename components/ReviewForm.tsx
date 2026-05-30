@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
+import { ProductType } from "@/types/products.type";
 import { FaRegStar } from "react-icons/fa";
 
-const ReviewForm = ({ product }: any) => {
+const ReviewForm = ({ product }: { product: ProductType }) => {
   return (
     <div>
       <div className="border border-gray-400">

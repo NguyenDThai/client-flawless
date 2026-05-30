@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 import { useCart } from "@/context/CartContext";
 import { toVND } from "@/lib/formatToVnd";
 import Image from "next/image";
@@ -6,8 +6,9 @@ import Link from "next/link";
 import React from "react";
 import { FaRegStar } from "react-icons/fa";
 import { IoBag } from "react-icons/io5";
+import { ProductType } from "@/types/products.type";
 
-const ProductCartInShop = ({ product }: any) => {
+const ProductCartInShop = ({ product }: { product: ProductType }) => {
   const { addToCart } = useCart();
   return (
     <Link href={`/product/${product.slug}`}>
@@ -33,13 +34,13 @@ const ProductCartInShop = ({ product }: any) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <span className="mb-1 opacity-30">{product.category}</span>
+        <span className="mb-1 opacity-30">{product?.category?.name}</span>
         <span className="mb-2">{product.name}</span>
         <div className="flex">
           {[...Array(5)].map((_, index) => (
             <FaRegStar
               key={index}
-              className={`${index < product.star ? "text-yellow-400" : "text-gray-300"} mr-1 mb-1.5`}
+              className={`${index < (product.star ?? 5) ? "text-yellow-400" : "text-gray-300"} mr-1 mb-1.5`}
             />
           ))}
         </div>

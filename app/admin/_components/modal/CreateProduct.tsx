@@ -1,11 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 import CreateProductForm from "@/app/admin/_components/modal/CreateProductForm";
 import api from "@/lib/api";
 import { CategoryProduct } from "@/types/categories.type";
 import React, { useEffect, useState } from "react";
 
-const CreateProduct = ({ setShowCreateProduct, fetchProducts }: any) => {
+const CreateProduct = ({
+  setShowCreateProduct,
+  fetchProducts,
+}: {
+  setShowCreateProduct: (show: boolean) => void;
+  fetchProducts: () => void;
+}) => {
   const [categories, setCategories] = useState<CategoryProduct[]>([]);
 
   const fetchCategories = async () => {

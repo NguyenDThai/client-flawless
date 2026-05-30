@@ -1,5 +1,5 @@
 "use client";
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 import InputDiscount from "@/components/InputDiscount";
 import { useCart } from "@/context/CartContext";
 import api from "@/lib/api";
@@ -21,6 +21,7 @@ import {
   footerVariants,
 } from "@/animations/cartAnimation";
 import { FaShoppingCart, FaTrashAlt } from "react-icons/fa";
+import { AxiosError } from "axios";
 
 const CartModel = () => {
   const {
@@ -54,9 +55,11 @@ const CartModel = () => {
       });
       toast.success("Áp dụng mã giảm giá thành công");
       fetchCart();
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as AxiosError;
       const message =
-        error.response?.data?.message || "Có lỗi xảy ra khi áp dụng mã";
+        (err.response?.data as { message: string })?.message ||
+        "Có lỗi xảy ra khi áp dụng mã";
       toast.error(message);
     }
   };
@@ -228,7 +231,7 @@ const CartModel = () => {
                   </motion.div>
                 ) : (
                   <div className="space-y-4">
-                    {cartItems.map((item: any) => (
+                    {cartItems.map((item) => (
                       <motion.div
                         key={item.id}
                         variants={itemVariants}

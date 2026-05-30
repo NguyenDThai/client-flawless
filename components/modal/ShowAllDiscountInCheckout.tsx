@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 
 import api from "@/lib/api";
@@ -11,7 +11,10 @@ import { IoClose } from "react-icons/io5";
 const ShowAllDiscountInCheckout = ({
   showAllDiscount,
   setShowAllDiscount,
-}: any) => {
+}: {
+  showAllDiscount: boolean;
+  setShowAllDiscount: (showAllDiscount: boolean) => void;
+}) => {
   const [allVoucher, setAllVoucher] = useState<DiscountType[]>([]);
 
   const fetchAllVoucher = async () => {

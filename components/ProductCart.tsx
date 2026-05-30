@@ -1,5 +1,5 @@
 "use client";
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { useCart } from "@/context/CartContext";
 import { toVND } from "@/lib/formatToVnd";
 import Image from "next/image";
@@ -8,8 +8,9 @@ import { FaRegStar } from "react-icons/fa";
 import { IoBag } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { ProductType } from "@/types/products.type";
 
-const ProductCart = ({ product }: any) => {
+const ProductCart = ({ product }: { product: ProductType }) => {
   const { addToCart } = useCart();
   const [isAdded, setIsAdded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -114,12 +115,12 @@ const ProductCart = ({ product }: any) => {
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <Link href={`/product/${product.slug}`}>
+      <Link href={`/product/${product?.slug}`}>
         <div className="w-full md:w-[300px]">
           <div className="relative overflow-hidden group">
             <motion.div variants={imageVariants} className="relative">
               <Image
-                src={product.image}
+                src={product?.image}
                 alt="product-image"
                 width={500}
                 height={500}
@@ -173,8 +174,8 @@ const ProductCart = ({ product }: any) => {
 
           {/* Product Info */}
           <motion.div variants={infoVariants} className="flex flex-col">
-            <span className="mb-1 opacity-30">{product.category}</span>
-            <span className="mb-2">{product.name}</span>
+            <span className="mb-1 opacity-30">{product?.category?.name}</span>
+            <span className="mb-2">{product?.name}</span>
 
             {/* Star Rating với hiệu ứng stagger */}
             <div className="flex">
@@ -188,7 +189,7 @@ const ProductCart = ({ product }: any) => {
                   viewport={{ once: true }}
                 >
                   <FaRegStar
-                    className={`${index < product.star ? "text-yellow-400" : "text-gray-300"} mr-1 mb-1.5`}
+                    className={`${index < (product?.star ?? 5) ? "text-yellow-400" : "text-gray-300"} mr-1 mb-1.5`}
                   />
                 </motion.div>
               ))}
@@ -209,7 +210,7 @@ const ProductCart = ({ product }: any) => {
               }}
               viewport={{ once: true }}
             >
-              {toVND(product.price)}
+              {toVND(product?.price)}
             </motion.span>
           </motion.div>
         </div>

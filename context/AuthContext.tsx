@@ -1,13 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 
 import api from "@/lib/api";
+import { AllUser } from "@/types/user.type";
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const AuthContext = createContext<any>(null);
+type AuthContextType = {
+  user: AllUser | null;
+  loading: boolean;
+  setUser: React.Dispatch<React.SetStateAction<AllUser | null>>;
+};
+
+const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<AllUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,8 +25,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           headers: { "Cache-Control": "no-cache" },
         });
         setUser(res.data);
-      } catch (error: any) {
-        if (error.response?.status === 401) {
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
           setUser(null);
         } else {
           console.error("Lỗi hệ thống");

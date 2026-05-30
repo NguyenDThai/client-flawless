@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 import { useCart } from "@/context/CartContext";
 import api from "@/lib/api";
@@ -10,7 +10,11 @@ const InputDiscount = ({
   valueDiscount,
   setValueDiscount,
   handleApplyDiscount,
-}: any) => {
+}: {
+  valueDiscount: string;
+  setValueDiscount: (value: string) => void;
+  handleApplyDiscount: () => void;
+}) => {
   const [showDiscount, setShowDiscount] = useState(false);
   const { cartItem, fetchCart } = useCart();
 

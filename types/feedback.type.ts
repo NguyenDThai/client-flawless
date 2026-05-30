@@ -3,4 +3,5 @@ export type FeedBackType = {
   name: string;
   email: string;
   comment: string;
+  isRead: boolean;
 };

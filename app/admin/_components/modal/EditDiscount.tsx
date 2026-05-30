@@ -1,8 +1,27 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 import api from "@/lib/api";
 import React from "react";
 import { FiX } from "react-icons/fi";
 import { toast } from "react-toastify";
+
+export interface EditDiscountFormData {
+  code: string;
+  type: string; // "PERCENT" | "FIXED"
+  value: number;
+  minAmount?: number | null;
+  maxDiscount?: number | null;
+  quantity: number;
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+}
+interface EditDiscountProps {
+  setShowEditModal: (value: boolean) => void;
+  editFormData: EditDiscountFormData;
+  setEditFormData: React.Dispatch<React.SetStateAction<EditDiscountFormData>>;
+  discountId?: number;
+  statusDiscount?: "active" | "scheduled" | "expired" | string;
+}
 
 const EditDiscount = ({
   setShowEditModal,
@@ -10,7 +29,7 @@ const EditDiscount = ({
   setEditFormData,
   discountId,
   statusDiscount,
-}: any) => {
+}: EditDiscountProps) => {
   const isScheduled = statusDiscount === "scheduled";
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -18,8 +37,8 @@ const EditDiscount = ({
     const { value, name, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
 
-    setEditFormData((prev: any) => {
-      let newValue: any;
+    setEditFormData((prev) => {
+      let newValue: string | number | boolean | null;
 
       if (type === "checkbox") {
         newValue = checked;
@@ -40,7 +59,7 @@ const EditDiscount = ({
   const handleSubmitEdit = async (id: number, e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const payload: any = { ...editFormData };
+      const payload: Partial<EditDiscountFormData> = { ...editFormData };
 
       // Xử lý startDate
       if (editFormData.startDate) {
@@ -56,12 +75,14 @@ const EditDiscount = ({
         delete payload.endDate;
       }
 
-      // Xóa undefined
-      Object.keys(payload).forEach((key) => {
-        if (payload[key] === undefined) {
-          delete payload[key];
-        }
-      });
+      // Ép kiểu mảng key về đúng cấu trúc để xóa các trường undefined một cách an toàn
+      (Object.keys(payload) as Array<keyof EditDiscountFormData>).forEach(
+        (key) => {
+          if (payload[key] === undefined) {
+            delete payload[key];
+          }
+        },
+      );
       const res = await api.patch(`/discount/${id}`, payload);
       if (res.status === 200) {
         toast.success("Chỉnh sửa thành công");
@@ -95,7 +116,14 @@ const EditDiscount = ({
           <div className="p-6">
             <form
               className="space-y-5"
-              onSubmit={(e) => handleSubmitEdit(discountId, e)}
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (discountId !== undefined) {
+                  handleSubmitEdit(discountId, e);
+                } else {
+                  toast.error("Không tìm thấy mã giảm giá cần cập nhật!");
+                }
+              }}
             >
               {/* Mã giảm giá */}
               <div>

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 
 import ContactForm from "@/components/ContactForm";
@@ -32,10 +32,10 @@ const ContactPage = () => {
     },
   ];
 
-  const [openId, setOpenId] = useState(null);
-  const [error, setError] = useState<any>({});
+  const [openId, setOpenId] = useState<number | null>(null);
+  const [error, setError] = useState({});
 
-  const toggleFAQ = (id: any) => {
+  const toggleFAQ = (id: number) => {
     setOpenId(openId === id ? null : id);
   };
 

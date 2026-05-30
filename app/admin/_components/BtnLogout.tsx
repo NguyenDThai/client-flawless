@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { useAuth } from "@/context/AuthContext";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
@@ -7,7 +5,7 @@ import React from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-const BtnLogout = ({ isCollapsed }: any) => {
+const BtnLogout = ({ isCollapsed }: { isCollapsed: boolean }) => {
   const route = useRouter();
   const { setUser } = useAuth();
 

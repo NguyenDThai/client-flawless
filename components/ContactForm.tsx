@@ -1,10 +1,22 @@
 "use client";
 import api from "@/lib/api";
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import axios from "axios";
+/*  */
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const ContactForm = ({ error, setError }: any) => {
+export interface ContactFormErrors {
+  name?: string;
+  email?: string;
+  comment?: string;
+}
+
+interface ContactFormProps {
+  error: ContactFormErrors;
+  setError: React.Dispatch<React.SetStateAction<ContactFormErrors>>;
+}
+
+const ContactForm = ({ error, setError }: ContactFormProps) => {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -17,7 +29,7 @@ const ContactForm = ({ error, setError }: any) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
     // Set lai rong khi field thay doi
-    setError((prev: any) => ({ ...prev, [e.target.name]: "" }));
+    setError((prev) => ({ ...prev, [e.target.name]: "" }));
   };
 
   const submitFeedBack = async (e: React.FormEvent) => {
@@ -25,8 +37,12 @@ const ContactForm = ({ error, setError }: any) => {
     try {
       await api.post("/feedback/add", data);
       toast.success("Gửi phản hồi thành công");
-    } catch (error: any) {
-      setError(error?.response?.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setError(error?.response?.data);
+      } else {
+        toast.error("Đã có lỗi xảy ra");
+      }
     }
   };
 

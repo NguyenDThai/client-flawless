@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
@@ -10,7 +10,9 @@ import { GoPencil } from "react-icons/go";
 
 const FeedBackPage = () => {
   const [data, setData] = useState<FeedBackType[]>([]);
-  const [feedbackDetail, setFeedbackDetail] = useState<any>(null);
+  const [feedbackDetail, setFeedbackDetail] = useState<FeedBackType | null>(
+    null,
+  );
 
   const [showModal, setShowModal] = useState(false);
 
@@ -60,7 +62,7 @@ const FeedBackPage = () => {
           </div>
         ))}
       </div>
-      {showModal && (
+      {showModal && feedbackDetail && (
         <ModalFeedBackDetail
           setShowModal={setShowModal}
           feedbackDetail={feedbackDetail}

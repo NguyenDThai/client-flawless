@@ -5,11 +5,12 @@ import Methods from "@/components/Methods";
 import ProductCartInShop from "@/components/ProductCartInShop";
 import ReviewForm from "@/components/ReviewForm";
 import { useCart } from "@/context/CartContext";
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 /* eslint-disable react-hooks/set-state-in-effect */
 
 import api from "@/lib/api";
 import { toVND } from "@/lib/formatToVnd";
+import { ProductType } from "@/types/products.type";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -22,8 +23,8 @@ import {
 
 const ProductDetail = () => {
   const { slug } = useParams();
-  const [product, setProduct] = useState<any>(null);
-  const [relatedProduct, setRelatedProduct] = useState([]);
+  const [product, setProduct] = useState<ProductType | null>(null);
+  const [relatedProduct, setRelatedProduct] = useState<ProductType[] | []>([]);
   const [quantity, setQuantity] = useState(1);
   const [active, setActive] = useState<"description" | "review">("description");
   const { addToCart } = useCart();
@@ -73,7 +74,7 @@ const ProductDetail = () => {
             <div className="space-y-8">
               <div>
                 <span className="inline-block text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  {product.category.name}
+                  {product?.category?.name}
                 </span>
               </div>
 
@@ -114,7 +115,7 @@ const ProductDetail = () => {
               <div className="flex items-center gap-2 text-sm border-t border-gray-100 pt-6">
                 <span className="text-gray-400">Danh mục:</span>
                 <span className="text-gray-800 font-medium bg-gray-100 px-3 py-1 rounded-full">
-                  {product.category.name}
+                  {product?.category?.name}
                 </span>
               </div>
 
@@ -192,7 +193,7 @@ const ProductDetail = () => {
           <div>
             <h2 className="text-4xl mb-7">Sản phẩm liên quan</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {relatedProduct.map((product: any) => (
+              {relatedProduct.map((product) => (
                 <div key={product.id}>
                   <ProductCartInShop product={product} />
                 </div>

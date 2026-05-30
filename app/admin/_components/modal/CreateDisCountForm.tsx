@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 
 import api from "@/lib/api";
@@ -6,7 +6,13 @@ import React, { useState } from "react";
 import { IoMdAdd, IoMdClose } from "react-icons/io";
 import { toast } from "react-toastify";
 
-const CreateDisCountForm = ({ setShowModal, fetchDisCount }: any) => {
+const CreateDisCountForm = ({
+  setShowModal,
+  fetchDisCount,
+}: {
+  setShowModal: (show: boolean) => void;
+  fetchDisCount: () => void;
+}) => {
   const [data, setData] = useState({
     code: "",
     type: "PERCENT",

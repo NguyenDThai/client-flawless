@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
@@ -116,10 +116,11 @@ const DisCountPage = () => {
                 <p className="text-2xl font-bold text-red-600">
                   {
                     allDiscount.filter((item) => {
-                      const endDate: any = new Date(item.endDate);
-                      const today: any = new Date();
+                      const endDate = new Date(item.endDate);
+                      const today = new Date();
                       const diffDays = Math.ceil(
-                        (endDate - today) / (1000 * 60 * 60 * 24),
+                        (endDate.getTime() - today.getTime()) /
+                          (1000 * 60 * 60 * 24),
                       );
                       return diffDays <= 7 && diffDays > 0;
                     }).length

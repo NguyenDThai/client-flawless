@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 
 import ProductCart from "@/components/ProductCart";
 import api from "@/lib/api";
+import { ProductType } from "@/types/products.type";
 import { useEffect, useState } from "react";
 
 const NewArrivals = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<ProductType[] | []>([]);
 
   const fetchFeature = async () => {
     const res = await api.get("/product/feature");

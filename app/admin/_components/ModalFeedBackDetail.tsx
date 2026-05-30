@@ -1,19 +1,18 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import api from "@/lib/api";
-import React, { useEffect, useState } from "react";
+import { FeedBackType } from "@/types/feedback.type";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const ModalFeedBackDetail = ({ setShowModal, feedbackDetail }: any) => {
-  const [isRead, setIsRead] = useState(false);
-
-  useEffect(() => {
-    if (feedbackDetail) {
-      setIsRead(feedbackDetail.isRead);
-    }
-  }, [feedbackDetail]);
+const ModalFeedBackDetail = ({
+  setShowModal,
+  feedbackDetail,
+}: {
+  setShowModal: (value: boolean) => void;
+  feedbackDetail: FeedBackType;
+}) => {
+  const [isRead, setIsRead] = useState(feedbackDetail.isRead);
 
   const updateFeedback = async (id: number) => {
     try {

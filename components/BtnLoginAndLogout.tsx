@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 
 import ModelUser from "@/components/modal/ModelUser";
@@ -9,7 +9,7 @@ import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 
-const BtnLoginAndLogout = ({ isLight }: any) => {
+const BtnLoginAndLogout = ({ isLight }: { isLight?: boolean }) => {
   const { user, loading } = useAuth();
   const { openCart, cartItem } = useCart();
 

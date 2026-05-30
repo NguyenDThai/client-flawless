@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 
 import { useCart } from "@/context/CartContext";
@@ -23,7 +23,9 @@ const ShowDiscountInOrder = () => {
     }
   };
 
-  const handleRemoveDiscount = async (e: any) => {
+  const handleRemoveDiscount = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     e.preventDefault();
     try {
       await api.delete("/cart/remove-discount");

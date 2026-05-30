@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 
 import api from "@/lib/api";
@@ -41,7 +41,7 @@ const CategoryPage = () => {
     }
   };
 
-  const handleDeleteId = async (id: any) => {
+  const handleDeleteId = async (id: number) => {
     const res = await api.delete(`/category/${id}`);
 
     if (res.status === 400) {

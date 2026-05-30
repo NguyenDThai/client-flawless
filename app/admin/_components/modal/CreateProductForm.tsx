@@ -1,8 +1,9 @@
 "use client";
 
 import api from "@/lib/api";
+import { CategoryProduct } from "@/types/categories.type";
 import Image from "next/image";
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -10,7 +11,11 @@ const CreateProductForm = ({
   setShowCreateProduct,
   categories,
   fetchProducts,
-}: any) => {
+}: {
+  setShowCreateProduct: (value: boolean) => void;
+  categories: CategoryProduct[];
+  fetchProducts: () => void;
+}) => {
   const [previews, setPreviews] = useState<string[]>([]);
   const [files, setFiles] = useState<File | null>(null);
 
@@ -138,7 +143,7 @@ const CreateProductForm = ({
           >
             <option value="">-- Chọn loại sản phẩm --</option>
 
-            {categories.map((category: any) => (
+            {categories.map((category: CategoryProduct) => (
               <option key={category.id} value={category.id}>
                 {category.name}
               </option>

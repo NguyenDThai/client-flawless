@@ -12,6 +12,7 @@ export type DiscountType = {
   isActive: boolean;
   startDate: string;
   endDate: string;
+  status?: "active" | "scheduled" | "expired";
 };
 
 export type ApplyDiscountResponse = {

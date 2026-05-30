@@ -1,17 +1,24 @@
 "use client";
 
-import EditDiscount from "@/app/admin/_components/modal/EditDiscount";
+import EditDiscount, {
+  EditDiscountFormData,
+} from "@/app/admin/_components/modal/EditDiscount";
+import { DiscountType } from "@/types/discount.type";
 import { useState } from "react";
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { FiEdit2, FiMoreVertical, FiTrash2 } from "react-icons/fi";
 
-const ShowTableDiscount = ({ handleDeleteDiscount, allDiscount }: any) => {
+const ShowTableDiscount = ({
+  handleDeleteDiscount,
+  allDiscount,
+}: {
+  handleDeleteDiscount: (id: number) => void;
+  allDiscount: DiscountType[];
+}) => {
   const [showEditModal, setShowEditModal] = useState(false);
   // Dung de load san pham len form edit
-  const [editItem, setEditItem] = useState<any>(null);
+  const [editItem, setEditItem] = useState<DiscountType | null>(null);
 
-  const [editFormData, setEditFormData] = useState({
+  const [editFormData, setEditFormData] = useState<EditDiscountFormData>({
     code: "",
     type: "PERCENT",
     value: 0,
@@ -23,7 +30,8 @@ const ShowTableDiscount = ({ handleDeleteDiscount, allDiscount }: any) => {
     isActive: true,
   });
 
-  const handleClick = (item: any) => {
+  const handleClick = (item: DiscountType) => {
+    console.log("🚀 ~ handleClick ~ item:", item);
     setEditItem(item);
     setEditFormData({
       code: item.code,
@@ -72,7 +80,7 @@ const ShowTableDiscount = ({ handleDeleteDiscount, allDiscount }: any) => {
 
           {/* Table body */}
           <tbody className="bg-white divide-y divide-gray-200">
-            {allDiscount.map((item: any, index: any) => {
+            {allDiscount.map((item: DiscountType, index: number) => {
               const remaining = item.quantity - (item.usedCount || 0);
               const usagePercent =
                 ((item.usedCount || 0) / item.quantity) * 100;
@@ -281,8 +289,8 @@ const ShowTableDiscount = ({ handleDeleteDiscount, allDiscount }: any) => {
           setShowEditModal={setShowEditModal}
           setEditFormData={setEditFormData}
           editFormData={editFormData}
-          discountId={editItem.id}
-          statusDiscount={editItem.status}
+          discountId={editItem?.id}
+          statusDiscount={editItem?.status}
         />
       )}
     </>

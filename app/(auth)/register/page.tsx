@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import api from "@/lib/api";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -27,12 +27,12 @@ const RegisterPage = () => {
 
       toast.success("Đăng ký thành công");
       route.push("/login");
-    } catch (error: any) {
-      const errors = error.response?.data;
-      console.log("🚀 ~ handlSubmit ~ errors:", errors);
-
-      if (typeof errors === "object") {
-        setError(errors);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const errors = error.response?.data.message;
+        toast.error(errors);
+      } else {
+        toast.error("Đã có lỗi xảy ra khi đăng ký");
       }
     }
   };

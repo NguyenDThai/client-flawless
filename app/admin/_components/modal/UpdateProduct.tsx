@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*  */
 "use client";
 
 import api from "@/lib/api";
+import { CategoryProduct } from "@/types/categories.type";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
@@ -13,7 +14,12 @@ const UpdateProduct = ({
   selectedId,
   showModelProduct,
   fetchProduct,
-}: any) => {
+}: {
+  setShowModelProduct: (value: boolean) => void;
+  selectedId: number;
+  showModelProduct: boolean;
+  fetchProduct: () => void;
+}) => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -26,7 +32,7 @@ const UpdateProduct = ({
 
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<CategoryProduct[]>([]);
 
   // Goi api lấy thông tin sản phẩm lên form update
   const fetchProductId = async () => {

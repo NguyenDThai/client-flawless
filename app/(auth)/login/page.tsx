@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
 import api from "@/lib/api";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -13,6 +13,7 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+  console.log("🚀 ~ LoginPage ~ data:", data);
 
   const { setUser } = useAuth();
   const router = useRouter();
@@ -37,9 +38,13 @@ const LoginPage = () => {
       } else {
         throw new Error("Đã có lỗi khi đăng nhập");
       }
-    } catch (error: any) {
-      const err = error.response?.data.message;
-      toast.error(err);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const err = error.response?.data.message;
+        toast.error(err);
+      } else {
+        toast.error("Đã có lỗi xảu ra");
+      }
     }
   };
 

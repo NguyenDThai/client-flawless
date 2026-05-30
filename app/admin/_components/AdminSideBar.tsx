@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import BtnLogout from "@/app/admin/_components/BtnLogout";
+import { AllUser } from "@/types/user.type";
 import Link from "next/link";
 import { useState } from "react";
 import { BiSolidDiscount } from "react-icons/bi";
@@ -16,7 +16,7 @@ import {
 import { MdOutlineCategory } from "react-icons/md";
 import { VscFeedback } from "react-icons/vsc";
 
-const AdminSideBar = ({ user }: any) => {
+const AdminSideBar = ({ user }: { user: AllUser }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState("dashboard");
 
