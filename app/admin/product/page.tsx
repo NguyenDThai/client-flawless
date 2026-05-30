@@ -253,7 +253,7 @@ const ProductManagementPage = () => {
         </div>
       )}
 
-      {showModelProduct && (
+      {showModelProduct && selectedId !== null && (
         <UpdateProduct
           setShowModelProduct={setShowModelProduct}
           showModelProduct={showModelProduct}
