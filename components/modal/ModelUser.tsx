@@ -31,13 +31,13 @@ const ModelUser = () => {
           <div className="flex items-center space-x-3">
             <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center">
               <span className="text-white text-lg font-semibold">
-                {user.email?.charAt(0).toUpperCase()}
+                {user?.email?.charAt(0).toUpperCase()}
               </span>
             </div>
             <div>
               <p className="text-white text-sm font-medium">Chào mừng</p>
               <p className="text-white font-semibold truncate max-w-[200px]">
-                {user.email}
+                {user?.email}
               </p>
             </div>
           </div>
@@ -50,13 +50,13 @@ const ModelUser = () => {
             <div className="flex items-center space-x-3 mb-4">
               <div className="h-12 w-12 rounded-full bg-gradient-to-r from-blue-100 to-blue-200 flex items-center justify-center">
                 <span className="text-blue-600 text-xl font-bold">
-                  {user.email?.charAt(0).toUpperCase()}
+                  {user?.email?.charAt(0).toUpperCase()}
                 </span>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-800">Tài khoản</h3>
                 <p className="text-gray-600 text-sm truncate max-w-[180px]">
-                  {user.email}
+                  {user?.email}
                 </p>
               </div>
             </div>
